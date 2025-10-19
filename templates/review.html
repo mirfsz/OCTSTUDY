@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block title %}Review Mistakes - SPF Study Coach{% endblock %}
+
+{% block content %}
+<div class="px-4 py-6 sm:px-0">
+    <div class="mb-6">
+        <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Review Mistakes</h1>
+        <p class="mt-2 text-gray-600 dark:text-gray-400">Focus on areas that need improvement</p>
+    </div>
+
+    {% if weak_items %}
+    <div class="space-y-6">
+        {% for item in weak_items %}
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+            <div class="p-6">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="flex items-center space-x-3">
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">
+                            {{ item.topic_name }}
+                        </span>
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200">
+                            {{ item.item_type.upper() }}
+                        </span>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-sm text-gray-500 dark:text-gray-400">Accuracy</div>
+                        <div class="text-lg font-semibold text-red-600 dark:text-red-400">
+                            {{ "%.1f"|format((item.correct_count / (item.correct_count + item.wrong_count)) * 100) }}%
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">
+                        {{ item.content }}
+                    </h3>
+                </div>
+
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400">
+                        <span>Correct: {{ item.correct_count }}</span>
+                        <span>Wrong: {{ item.wrong_count }}</span>
+                        <span>Box: {{ item.box }}</span>
+                    </div>
+                    <div class="flex space-x-2">
+                        {% if item.item_type == 'mcq' %}
+                        <a href="{{ url_for('drill_mcq') }}" class="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded-lg transition-colors">
+                            Practice MCQ
+                        </a>
+                        {% else %}
+                        <a href="{{ url_for('practice_saq') }}" class="px-3 py-1 bg-green-600 hover:bg-green-700 text-white text-sm rounded-lg transition-colors">
+                            Practice SAQ
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Study Recommendations -->
+    <div class="mt-8 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
+        <h3 class="text-lg font-medium text-blue-900 dark:text-blue-100 mb-2">Study Recommendations</h3>
+        <ul class="text-sm text-blue-800 dark:text-blue-200 space-y-1">
+            <li>• Focus on items with accuracy below 80%</li>
+            <li>• Use spaced repetition - review items in lower boxes more frequently</li>
+            <li>• Practice MCQ drills for factual recall</li>
+            <li>• Use SAQ practice for application skills</li>
+            <li>• Review flashcards for key concepts</li>
+        </ul>
+    </div>
+
+    {% else %}
+    <div class="text-center py-12">
+        <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-white">No weak areas found</h3>
+        <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Great job! Keep up the good work.</p>
+        <div class="mt-6">
+            <a href="{{ url_for('drill_mcq') }}" class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors">
+                Start New Drill
+            </a>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

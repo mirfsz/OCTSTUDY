@@ -1,0 +1,74 @@
+[
+  {
+    "front": "BWC 10 Exceptions",
+    "back": "1. Personal hygiene\n2. Medical emergencies\n3. Undercover operations\n4. Victim interviews\n5. Witness protection\n6. Family disputes\n7. Mental health calls\n8. Juvenile interviews\n9. Sexual offences\n10. National security",
+    "topic_name": "BWC",
+    "source_ref": "BWC Manual"
+  },
+  {
+    "front": "SALUTE Format",
+    "back": "S - Size (number of subjects)\nA - Activity (what they're doing)\nL - Location (specific address/landmark)\nU - Unit (your unit/identifier)\nT - Time (current time)\nE - Equipment (weapons/vehicles)",
+    "topic_name": "SALUTE",
+    "source_ref": "SALUTE Guidelines"
+  },
+  {
+    "front": "ACTive-PUNCH Framework",
+    "back": "A - Assess the situation\nC - Communicate clearly\nT - Take appropriate action\n\nP - Protect yourself\nU - Use minimum force\nN - Notify supervisor\nC - Control the scene\nH - Help the victim",
+    "topic_name": "AOJ",
+    "source_ref": "Use of Force Manual"
+  },
+  {
+    "front": "NWD Pre-checks (3 Questions)",
+    "back": "1. Is the person who they claim to be?\n2. Are they wanted for any offences?\n3. Are there any other relevant matters?",
+    "topic_name": "NWD",
+    "source_ref": "NWD Procedures"
+  },
+  {
+    "front": "AVS 24-hr Hotline",
+    "back": "1800-476-1600\n\nFor wildlife incidents:\n- Wild boars\n- Snakes\n- Monkeys\n- Other dangerous animals",
+    "topic_name": "Wildlife Incidents",
+    "source_ref": "AVS Guidelines"
+  },
+  {
+    "front": "Sec 420 Elements",
+    "back": "1. Deception (dishonest or fraudulent)\n2. Inducing person to deliver property\n3. Causing wrongful loss to another\n4. Causing wrongful gain to self",
+    "topic_name": "Scams",
+    "source_ref": "Penal Code"
+  },
+  {
+    "front": "Use of Force Levels",
+    "back": "1. Presence (officer presence)\n2. Verbal commands\n3. Empty hand techniques\n4. Chemical agents\n5. Impact weapons\n6. Lethal force",
+    "topic_name": "Use of Force",
+    "source_ref": "Use of Force Guidelines"
+  },
+  {
+    "front": "Roadblock Roles",
+    "back": "Stopper:\n- Stop vehicles\n- Direct traffic\n- Maintain safety\n\nChecker:\n- Examine documents\n- Conduct checks\n- Question occupants",
+    "topic_name": "Roadblock",
+    "source_ref": "Roadblock Procedures"
+  },
+  {
+    "front": "Exhibit Chain of Custody",
+    "back": "1. Collect immediately\n2. Seal in presence of witness\n3. Label with details\n4. Store securely\n5. Document all transfers\n6. Maintain continuity",
+    "topic_name": "Exhibits",
+    "source_ref": "Exhibit Handling Procedures"
+  },
+  {
+    "front": "Constitutional Rights (Article 9)",
+    "back": "Right to:\n- Personal liberty\n- Due process\n- Equal protection\n- Freedom from arbitrary arrest\n- Legal representation",
+    "topic_name": "Constitutional Rights",
+    "source_ref": "Constitution"
+  },
+  {
+    "front": "Offensive Weapons (S453 PC)",
+    "back": "Any article made or adapted for:\n- Causing injury to person\n- Disabling or disfiguring\n- Threatening with injury\n\nExamples: Knives, clubs, chains",
+    "topic_name": "Offensive Weapons",
+    "source_ref": "Penal Code"
+  },
+  {
+    "front": "Sexual Offence BWC Protocol",
+    "back": "1. Activate BWC immediately\n2. No exceptions apply\n3. Record entire interaction\n4. Protect victim privacy\n5. Secure evidence\n6. Follow SOP strictly",
+    "topic_name": "Sexual Offences",
+    "source_ref": "Sexual Offence Guidelines"
+  }
+]

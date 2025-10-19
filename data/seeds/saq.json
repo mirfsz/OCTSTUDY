@@ -1,0 +1,42 @@
+[
+  {
+    "prompt": "Officer Tan responds to a complaint about a neighbor who has been throwing red paint at the complainant's gate every night. The neighbor admits to the act but claims it's just a prank. Analyze this scenario.",
+    "model_outline": "1. Define: Criminal Mischief (S427 PC)\n2. Elements: Property damage, intentional act\n3. Apply: Red paint on gate = property damage, repeated acts show intent\n4. Conclusion: Arrestable offence under S427",
+    "keywords_json": "[\"property damage\", \"intentional\", \"criminal mischief\", \"S427\", \"arrestable\"]",
+    "statute_refs_json": "[\"S427 Penal Code\"]",
+    "topic_name": "Scams",
+    "source_ref": "Criminal Law Manual"
+  },
+  {
+    "prompt": "During a routine patrol, Officer Lim observes a group of youths smoking what appears to be cannabis in a public park. One youth attempts to flee when approached. Analyze the appropriate response.",
+    "model_outline": "1. Define: Drug offences under MDA\n2. Elements: Possession, consumption, public place\n3. Apply: Cannabis smoking in public park, attempted flight shows consciousness of guilt\n4. Conclusion: Arrestable offences, use reasonable force to prevent escape",
+    "keywords_json": "[\"drug offences\", \"MDA\", \"possession\", \"public place\", \"reasonable force\", \"arrestable\"]",
+    "statute_refs_json": "[\"Misuse of Drugs Act\", \"S427 Penal Code\"]",
+    "topic_name": "AOJ",
+    "source_ref": "Drug Enforcement Manual"
+  },
+  {
+    "prompt": "A wild boar has been spotted in a residential area causing damage to property and frightening residents. The boar appears aggressive and is blocking a main road. Analyze the appropriate response.",
+    "model_outline": "1. Define: Wildlife incident, public safety concern\n2. Elements: Dangerous animal, public place, property damage\n3. Apply: Wild boar in residential area, aggressive behavior, road blockage\n4. Conclusion: Contact AVS 24hr hotline (1800-476-1600), cordon area, await specialist response",
+    "keywords_json": "[\"wildlife incident\", \"AVS\", \"public safety\", \"cordon\", \"specialist response\"]",
+    "statute_refs_json": "[\"Wildlife Act\", \"AVS Guidelines\"]",
+    "topic_name": "Wildlife Incidents",
+    "source_ref": "Wildlife Response Procedures"
+  },
+  {
+    "prompt": "Officer Chen responds to a domestic dispute where a husband has locked his wife out of their flat and thrown her belongings onto the corridor. The wife is distressed and claims this happens regularly. Analyze this scenario.",
+    "model_outline": "1. Define: Domestic violence, criminal force, public nuisance\n2. Elements: Family relationship, unlawful force, public annoyance\n3. Apply: Locking out wife, throwing belongings, regular pattern, public corridor\n4. Conclusion: Arrestable offences under S350 (criminal force) and S290 (public nuisance)",
+    "keywords_json": "[\"domestic violence\", \"criminal force\", \"public nuisance\", \"S350\", \"S290\", \"family relationship\"]",
+    "statute_refs_json": "[\"S350 Penal Code\", \"S290 Penal Code\"]",
+    "topic_name": "Dispute Management",
+    "source_ref": "Domestic Violence Guidelines"
+  },
+  {
+    "prompt": "During a traffic stop, the driver becomes aggressive and threatens the officer with a knife. The officer has drawn his service weapon. Analyze the appropriate response under AOJ principles.",
+    "model_outline": "1. Define: AOJ principles, use of force continuum\n2. Elements: Imminent threat, proportionality, necessity\n3. Apply: Knife threat = deadly force, officer's life in danger, service weapon drawn\n4. Conclusion: Use of deadly force justified under AOJ, attempt verbal commands first, use minimum necessary force",
+    "keywords_json": "[\"AOJ\", \"use of force\", \"deadly force\", \"imminent threat\", \"proportionality\", \"necessity\"]",
+    "statute_refs_json": "[\"Use of Force Guidelines\", \"AOJ Manual\"]",
+    "topic_name": "AOJ",
+    "source_ref": "Use of Force Manual"
+  }
+]

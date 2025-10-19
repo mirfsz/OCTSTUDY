@@ -1,0 +1,82 @@
+[
+  {
+    "stem": "When should a BWC be activated?",
+    "choices": ["Only during arrests", "At the start of every police interaction", "Only when force is used", "When directed by supervisor"],
+    "answer_idx": 1,
+    "explanation": "BWC should be activated at the start of every police interaction to ensure complete documentation of the encounter.",
+    "topic_name": "BWC",
+    "source_ref": "BWC Manual"
+  },
+  {
+    "stem": "What is the primary purpose of SALUTE reporting?",
+    "choices": ["Document arrests", "Report armed incidents", "Track traffic violations", "Record witness statements"],
+    "answer_idx": 1,
+    "explanation": "SALUTE is specifically designed for reporting armed incidents and threats to ensure proper response coordination.",
+    "topic_name": "SALUTE",
+    "source_ref": "SALUTE Guidelines"
+  },
+  {
+    "stem": "Which of the following is NOT a BWC exception?",
+    "choices": ["Personal hygiene", "Medical emergencies", "Routine traffic stops", "Undercover operations"],
+    "answer_idx": 2,
+    "explanation": "Routine traffic stops are not an exception - BWC should be activated for all police interactions including traffic stops.",
+    "topic_name": "BWC",
+    "source_ref": "BWC Manual"
+  },
+  {
+    "stem": "What does the 'S' in SALUTE stand for?",
+    "choices": ["Size", "Situation", "Suspect", "Status"],
+    "answer_idx": 0,
+    "explanation": "SALUTE stands for Size, Activity, Location, Unit, Time, Equipment.",
+    "topic_name": "SALUTE",
+    "source_ref": "SALUTE Guidelines"
+  },
+  {
+    "stem": "When conducting a roadblock, who is responsible for stopping vehicles?",
+    "choices": ["Checker", "Stopper", "Supervisor", "All officers"],
+    "answer_idx": 1,
+    "explanation": "The Stopper is responsible for stopping vehicles, while the Checker examines documents and conducts checks.",
+    "topic_name": "Roadblock",
+    "source_ref": "Roadblock Procedures"
+  },
+  {
+    "stem": "What is the minimum force required under AOJ principles?",
+    "choices": ["Maximum force", "Reasonable force", "Minimum force", "Deadly force"],
+    "answer_idx": 2,
+    "explanation": "AOJ requires the use of minimum force necessary to achieve the lawful objective.",
+    "topic_name": "AOJ",
+    "source_ref": "Use of Force Guidelines"
+  },
+  {
+    "stem": "Which section of the Penal Code covers criminal mischief?",
+    "choices": ["S420", "S427", "S415", "S416"],
+    "answer_idx": 1,
+    "explanation": "Section 427 of the Penal Code covers criminal mischief, which involves causing damage to property.",
+    "topic_name": "Scams",
+    "source_ref": "Penal Code"
+  },
+  {
+    "stem": "What is the purpose of NWD checks?",
+    "choices": ["Verify identity", "Check criminal records", "Confirm address", "All of the above"],
+    "answer_idx": 3,
+    "explanation": "NWD checks are used to verify identity, check criminal records, and confirm address information.",
+    "topic_name": "NWD",
+    "source_ref": "NWD Procedures"
+  },
+  {
+    "stem": "When should exhibits be sealed?",
+    "choices": ["Immediately after collection", "At the station", "Before court", "After analysis"],
+    "answer_idx": 0,
+    "explanation": "Exhibits should be sealed immediately after collection to maintain chain of custody.",
+    "topic_name": "Exhibits",
+    "source_ref": "Exhibit Handling Procedures"
+  },
+  {
+    "stem": "What is the AVS 24-hour hotline number?",
+    "choices": ["1800-476-1600", "1800-476-1601", "1800-476-1602", "1800-476-1603"],
+    "answer_idx": 0,
+    "explanation": "The AVS 24-hour hotline number is 1800-476-1600 for wildlife-related incidents.",
+    "topic_name": "Wildlife Incidents",
+    "source_ref": "AVS Guidelines"
+  }
+]

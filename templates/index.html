@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - SPF Study Coach{% endblock %}
+
+{% block content %}
+<div class="px-4 py-6 sm:px-0">
+    <div class="mb-8">
+        <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Study Dashboard</h1>
+        <p class="mt-2 text-gray-600 dark:text-gray-400">Track your progress and focus on weak areas</p>
+    </div>
+
+    <!-- Weak Topics Section -->
+    {% if weak_topics %}
+    <div class="mb-8">
+        <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Focus Areas</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {% for topic in weak_topics %}
+            <div class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4">
+                <div class="flex items-center justify-between">
+                    <h3 class="font-medium text-red-900 dark:text-red-100">{{ topic.name }}</h3>
+                    <span class="text-sm text-red-600 dark:text-red-400">
+                        {{ "%.1f"|format(topic.accuracy * 100) }}%
+                    </span>
+                </div>
+                <div class="mt-2 w-full bg-red-200 dark:bg-red-800 rounded-full h-2">
+                    <div class="bg-red-500 h-2 rounded-full" style="width: {{ topic.accuracy * 100 }}%"></div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Quick Actions -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <a href="{{ url_for('drill_mcq') }}" class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover:shadow-md transition-shadow">
+            <div class="flex items-center">
+                <div class="flex-shrink-0">
+                    <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center">
+                        <svg class="w-5 h-5 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="ml-4">
+                    <h3 class="text-lg font-medium text-gray-900 dark:text-white">MCQ Drill</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">Quick 10-question practice</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="{{ url_for('practice_saq') }}" class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover:shadow-md transition-shadow">
+            <div class="flex items-center">
+                <div class="flex-shrink-0">
+                    <div class="w-8 h-8 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center">
+                        <svg class="w-5 h-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="ml-4">
+                    <h3 class="text-lg font-medium text-gray-900 dark:text-white">SAQ Practice</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">Structured answer practice</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="{{ url_for('cheats') }}" class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover:shadow-md transition-shadow">
+            <div class="flex items-center">
+                <div class="flex-shrink-0">
+                    <div class="w-8 h-8 bg-yellow-100 dark:bg-yellow-900 rounded-lg flex items-center justify-center">
+                        <svg class="w-5 h-5 text-yellow-600 dark:text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="ml-4">
+                    <h3 class="text-lg font-medium text-gray-900 dark:text-white">Cheat Sheets</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">Quick reference cards</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="{{ url_for('review') }}" class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover:shadow-md transition-shadow">
+            <div class="flex items-center">
+                <div class="flex-shrink-0">
+                    <div class="w-8 h-8 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center">
+                        <svg class="w-5 h-5 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="ml-4">
+                    <h3 class="text-lg font-medium text-gray-900 dark:text-white">Review Mistakes</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">Focus on weak areas</p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <!-- Study Tips -->
+    <div class="mt-8 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
+        <h3 class="text-lg font-medium text-blue-900 dark:text-blue-100 mb-2">Study Tips</h3>
+        <ul class="text-sm text-blue-800 dark:text-blue-200 space-y-1">
+            <li>• Focus on topics with accuracy below 80%</li>
+            <li>• Use the SAQ scaffold: Define → Interpret → Apply → Conclusion</li>
+            <li>• Practice MCQ drills daily for retention</li>
+            <li>• Review flashcards for quick recall</li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

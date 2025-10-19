@@ -1,0 +1,190 @@
+{% extends "base.html" %}
+
+{% block title %}SAQ Practice - SPF Study Coach{% endblock %}
+
+{% block content %}
+<div class="px-4 py-6 sm:px-0">
+    <div class="mb-6">
+        <h1 class="text-3xl font-bold text-gray-900 dark:text-white">SAQ Practice</h1>
+        <p class="mt-2 text-gray-600 dark:text-gray-400">Practice structured answers with guided scaffolding</p>
+    </div>
+
+    {% if saq %}
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+        <div class="p-6">
+            <div class="mb-4">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
+                    {{ saq.topic_name }}
+                </span>
+            </div>
+
+            <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-6">
+                {{ saq.prompt }}
+            </h3>
+
+            <!-- SAQ Scaffold -->
+            <div class="space-y-6">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        1. Define the Law
+                    </label>
+                    <textarea id="defineLaw" rows="3" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white" placeholder="State the relevant law/statute..."></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        2. Interpret/Elements
+                    </label>
+                    <textarea id="interpretElements" rows="3" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white" placeholder="Break down the elements required..."></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        3. Apply to Facts
+                    </label>
+                    <textarea id="applyFacts" rows="4" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white" placeholder="Apply the law to the specific facts given..."></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        4. Conclusion
+                    </label>
+                    <div class="space-y-3">
+                        <textarea id="conclusion" rows="2" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white" placeholder="State your conclusion..."></textarea>
+                        <div class="flex items-center space-x-4">
+                            <label class="flex items-center">
+                                <input type="checkbox" id="arrestableOffence" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                                <span class="ml-2 text-sm text-gray-700 dark:text-gray-300">Arrestable offence?</span>
+                            </label>
+                            <input type="text" id="statuteRef" placeholder="Statute reference (e.g., S427 PC)" class="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white text-sm">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 flex space-x-4">
+                <button id="gradeAnswer" class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors">
+                    Grade Answer
+                </button>
+                <button id="showModel" class="px-6 py-2 bg-gray-600 hover:bg-gray-700 text-white font-medium rounded-lg transition-colors">
+                    Show Model Answer
+                </button>
+                <a href="{{ url_for('practice_saq') }}" class="px-6 py-2 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition-colors">
+                    New Question
+                </a>
+            </div>
+
+            <!-- Grading Results -->
+            <div id="gradingResults" class="mt-6 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg hidden">
+                <h4 class="font-medium text-gray-900 dark:text-white mb-2">Grading Results:</h4>
+                <div class="space-y-2">
+                    <div class="flex justify-between">
+                        <span class="text-sm text-gray-600 dark:text-gray-400">Keyword Match:</span>
+                        <span class="text-sm font-medium" id="keywordScore">0/0</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-sm text-gray-600 dark:text-gray-400">Overall Score:</span>
+                        <span class="text-sm font-medium" id="overallScore">0%</span>
+                    </div>
+                    <div class="mt-2">
+                        <p class="text-sm text-gray-600 dark:text-gray-400" id="feedback">Feedback will appear here</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Model Answer -->
+            <div id="modelAnswer" class="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg hidden">
+                <h4 class="font-medium text-blue-900 dark:text-blue-100 mb-2">Model Answer:</h4>
+                <div class="text-sm text-blue-800 dark:text-blue-200 whitespace-pre-line">{{ saq.model_outline }}</div>
+                
+                {% if saq.statute_refs %}
+                <div class="mt-3">
+                    <h5 class="font-medium text-blue-900 dark:text-blue-100 mb-1">Statute References:</h5>
+                    <div class="flex flex-wrap gap-2">
+                        {% for ref in saq.statute_refs %}
+                        <span class="px-2 py-1 bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-200 text-xs rounded">{{ ref }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Keywords for Reference -->
+            <div class="mt-6 p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg">
+                <h4 class="font-medium text-yellow-900 dark:text-yellow-100 mb-2">Key Terms to Include:</h4>
+                <div class="flex flex-wrap gap-2">
+                    {% for keyword in saq.keywords %}
+                    <span class="px-2 py-1 bg-yellow-100 dark:bg-yellow-800 text-yellow-800 dark:text-yellow-200 text-xs rounded">{{ keyword }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% else %}
+    <div class="text-center py-12">
+        <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+        </svg>
+        <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-white">No SAQ available</h3>
+        <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Check back later for new scenarios.</p>
+    </div>
+    {% endif %}
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const gradeButton = document.getElementById('gradeAnswer');
+    const showModelButton = document.getElementById('showModel');
+    const gradingResults = document.getElementById('gradingResults');
+    const modelAnswer = document.getElementById('modelAnswer');
+    
+    const keywords = {{ saq.keywords|tojson if saq else '[]' }};
+
+    gradeButton.addEventListener('click', function() {
+        const defineLaw = document.getElementById('defineLaw').value;
+        const interpretElements = document.getElementById('interpretElements').value;
+        const applyFacts = document.getElementById('applyFacts').value;
+        const conclusion = document.getElementById('conclusion').value;
+        
+        const fullAnswer = `${defineLaw} ${interpretElements} ${applyFacts} ${conclusion}`.toLowerCase();
+        
+        // Simple keyword matching
+        const matchedKeywords = keywords.filter(keyword => 
+            fullAnswer.includes(keyword.toLowerCase())
+        );
+        
+        const keywordScore = `${matchedKeywords.length}/${keywords.length}`;
+        const overallScore = Math.round((matchedKeywords.length / keywords.length) * 100);
+        
+        document.getElementById('keywordScore').textContent = keywordScore;
+        document.getElementById('overallScore').textContent = overallScore + '%';
+        
+        let feedback = `Matched ${matchedKeywords.length} out of ${keywords.length} keywords. `;
+        if (matchedKeywords.length === keywords.length) {
+            feedback += "Excellent! All key terms included.";
+        } else if (matchedKeywords.length >= keywords.length * 0.7) {
+            feedback += "Good coverage of key terms.";
+        } else {
+            feedback += "Consider including more key terms for better coverage.";
+        }
+        
+        document.getElementById('feedback').textContent = feedback;
+        gradingResults.classList.remove('hidden');
+    });
+
+    showModelButton.addEventListener('click', function() {
+        modelAnswer.classList.toggle('hidden');
+    });
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', function(e) {
+        if (e.ctrlKey && e.key === 'Enter') {
+            gradeAnswer.click();
+        } else if (e.ctrlKey && e.key === 'm') {
+            showModel.click();
+        }
+    });
+});
+</script>
+{% endblock %}
