@@ -1,15 +1,48 @@
 {% extends "base.html" %}
 
-{% block title %}MCQ Drill - GRFan Study Buddy{% endblock %}
+{% block title %}MCQ Drill - GRFan{% endblock %}
 
 {% block content %}
 <div class="px-4 py-6 sm:px-0">
+    <!-- Back to Dashboard Button -->
+    <div class="mb-4">
+        <a href="{{ url_for('index') }}" class="inline-flex items-center text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
+            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            Back to Dashboard
+        </a>
+    </div>
+
     <div class="mb-6">
         <h1 class="text-3xl font-bold text-gray-900 dark:text-white">MCQ Drill</h1>
         <p class="mt-2 text-gray-600 dark:text-gray-400">Test your knowledge with quick practice questions</p>
     </div>
 
+    <!-- Keyboard Shortcuts Hint -->
+    <div class="mb-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+        <div class="flex items-start">
+            <svg class="w-5 h-5 text-blue-600 dark:text-blue-400 mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+            </svg>
+            <div class="text-sm text-blue-800 dark:text-blue-200">
+                <span class="font-semibold">⌨️ Keyboard Shortcuts:</span> Press <kbd class="px-2 py-1 bg-white dark:bg-gray-800 border border-blue-300 dark:border-blue-700 rounded text-xs font-mono">1-4</kbd> to select answers, <kbd class="px-2 py-1 bg-white dark:bg-gray-800 border border-blue-300 dark:border-blue-700 rounded text-xs font-mono">Enter</kbd> to submit/next
+            </div>
+        </div>
+    </div>
+
     {% if questions %}
+    <!-- Progress Bar -->
+    <div class="mb-6">
+        <div class="flex items-center justify-between mb-2">
+            <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Progress</span>
+            <span class="text-sm font-medium text-gray-700 dark:text-gray-300"><span id="progressCount">0</span>/{{ questions|length }}</span>
+        </div>
+        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 overflow-hidden">
+            <div id="progressBar" class="bg-gradient-to-r from-blue-500 to-blue-600 h-3 rounded-full transition-all duration-300 ease-out" style="width: 0%"></div>
+        </div>
+    </div>
+
     <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
         <div class="p-6">
             <div class="flex justify-between items-center mb-6">
@@ -222,6 +255,20 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    function updateProgressBar() {
+        const answeredCount = Object.keys(answers).length;
+        const progressPercent = (answeredCount / questions.length) * 100;
+        const progressBar = document.getElementById('progressBar');
+        const progressCount = document.getElementById('progressCount');
+        
+        if (progressBar) {
+            progressBar.style.width = progressPercent + '%';
+        }
+        if (progressCount) {
+            progressCount.textContent = answeredCount;
+        }
+    }
+
     function submitAnswer(questionElem) {
         const selectedAnswer = questionElem.querySelector('input[type="radio"]:checked');
         
@@ -244,6 +291,9 @@ document.addEventListener('DOMContentLoaded', function() {
             wrongCount++;
             wrongDisplay.textContent = wrongCount;
         }
+
+        // Update progress bar
+        updateProgressBar();
 
         // Hide submit button
         const submitBtn = questionElem.querySelector('.submit-btn');
