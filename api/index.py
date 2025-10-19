@@ -138,123 +138,94 @@ def load_seed_data(conn):
         if cur.fetchone()[0] > 0:
             return  # Data already loaded
         
-        # Load topics
-        topics_data = [
-            {"name": "BWC"},
-            {"name": "NWD"},
-            {"name": "Scams"},
-            {"name": "AOS"},
-            {"name": "Roadblock"},
-            {"name": "PHA"},
-            {"name": "AOJ"},
-            {"name": "SALUTE"},
-            {"name": "Exhibits"},
-            {"name": "Traffic"}
-        ]
+        # Get the path to seed files
+        base_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        seeds_path = os.path.join(base_path, 'data', 'seeds')
+        
+        # Load topics from JSON
+        topics_file = os.path.join(seeds_path, 'topics.json')
+        with open(topics_file, 'r') as f:
+            topics_data = json.load(f)
         
         for topic in topics_data:
             cur.execute("INSERT OR IGNORE INTO topics (name) VALUES (?)", (topic["name"],))
         
         conn.commit()
         
-        # Load sample MCQ data
-        sample_mcqs = [
-            {
-                "stem": "When should a BWC be activated?",
-                "choices": ["Only during arrests", "At the start of every police interaction", "Only when force is used", "When directed by supervisor"],
-                "answer_idx": 1,
-                "explanation": "BWC should be activated at the start of every police interaction to ensure complete documentation.",
-                "topic_name": "BWC",
-                "source_ref": "BWC Manual"
-            },
-            {
-                "stem": "What is the primary purpose of SALUTE reporting?",
-                "choices": ["Document arrests", "Report armed incidents", "Track traffic violations", "Record witness statements"],
-                "answer_idx": 1,
-                "explanation": "SALUTE is specifically for reporting armed incidents and threats.",
-                "topic_name": "SALUTE",
-                "source_ref": "SALUTE Guidelines"
-            }
-        ]
+        # Load MCQ data from JSON
+        mcq_file = os.path.join(seeds_path, 'mcq.json')
+        with open(mcq_file, 'r') as f:
+            mcq_data = json.load(f)
         
-        for mcq in sample_mcqs:
+        for mcq in mcq_data:
             cur.execute("SELECT id FROM topics WHERE name = ?", (mcq["topic_name"],))
-            topic_id = cur.fetchone()[0]
-            
-            cur.execute("""
-                INSERT INTO mcq (stem, choices_json, answer_idx, explanation, topic_id, source_ref)
-                VALUES (?, ?, ?, ?, ?, ?)
-            """, (
-                mcq["stem"],
-                json.dumps(mcq["choices"]),
-                mcq["answer_idx"],
-                mcq["explanation"],
-                topic_id,
-                mcq["source_ref"]
-            ))
+            result = cur.fetchone()
+            if result:
+                topic_id = result[0]
+                
+                cur.execute("""
+                    INSERT INTO mcq (stem, choices_json, answer_idx, explanation, topic_id, source_ref)
+                    VALUES (?, ?, ?, ?, ?, ?)
+                """, (
+                    mcq["stem"],
+                    json.dumps(mcq["choices"]),
+                    mcq["answer_idx"],
+                    mcq["explanation"],
+                    topic_id,
+                    mcq.get("source_ref", "")
+                ))
         
-        # Load sample SAQ data
-        sample_saqs = [
-            {
-                "prompt": "Officer Tan responds to a complaint about a neighbor who has been throwing red paint at the complainant's gate every night. The neighbor admits to the act but claims it's just a prank. Analyze this scenario.",
-                "model_outline": "1. Define: Criminal Mischief (S427 PC)\n2. Elements: Property damage, intentional act\n3. Apply: Red paint on gate = property damage, repeated acts show intent\n4. Conclusion: Arrestable offence under S427",
-                "keywords_json": json.dumps(["property damage", "intentional", "criminal mischief", "S427"]),
-                "statute_refs_json": json.dumps(["S427 Penal Code"]),
-                "topic_name": "Scams",
-                "source_ref": "Criminal Law Manual"
-            }
-        ]
+        # Load SAQ data from JSON
+        saq_file = os.path.join(seeds_path, 'saq.json')
+        with open(saq_file, 'r') as f:
+            saq_data = json.load(f)
         
-        for saq in sample_saqs:
+        for saq in saq_data:
             cur.execute("SELECT id FROM topics WHERE name = ?", (saq["topic_name"],))
-            topic_id = cur.fetchone()[0]
-            
-            cur.execute("""
-                INSERT INTO saq (prompt, model_outline, keywords_json, statute_refs_json, topic_id, source_ref)
-                VALUES (?, ?, ?, ?, ?, ?)
-            """, (
-                saq["prompt"],
-                saq["model_outline"],
-                saq["keywords_json"],
-                saq["statute_refs_json"],
-                topic_id,
-                saq["source_ref"]
-            ))
+            result = cur.fetchone()
+            if result:
+                topic_id = result[0]
+                
+                cur.execute("""
+                    INSERT INTO saq (prompt, model_outline, keywords_json, statute_refs_json, topic_id, source_ref)
+                    VALUES (?, ?, ?, ?, ?, ?)
+                """, (
+                    saq["prompt"],
+                    saq["model_outline"],
+                    json.dumps(saq["keywords_json"]),
+                    json.dumps(saq["statute_refs_json"]),
+                    topic_id,
+                    saq.get("source_ref", "")
+                ))
         
-        # Load sample flashcards
-        sample_flashcards = [
-            {
-                "front": "BWC 10 Exceptions",
-                "back": "1. Personal hygiene 2. Medical emergencies 3. Undercover operations 4. Victim interviews 5. Witness protection 6. Family disputes 7. Mental health calls 8. Juvenile interviews 9. Sexual offences 10. National security",
-                "topic_name": "BWC",
-                "source_ref": "BWC Manual"
-            },
-            {
-                "front": "SALUTE Format",
-                "back": "S - Size, A - Activity, L - Location, U - Unit, T - Time, E - Equipment",
-                "topic_name": "SALUTE",
-                "source_ref": "SALUTE Guidelines"
-            }
-        ]
+        # Load flashcards from JSON
+        flashcards_file = os.path.join(seeds_path, 'flashcards.json')
+        with open(flashcards_file, 'r') as f:
+            flashcards_data = json.load(f)
         
-        for card in sample_flashcards:
+        for card in flashcards_data:
             cur.execute("SELECT id FROM topics WHERE name = ?", (card["topic_name"],))
-            topic_id = cur.fetchone()[0]
-            
-            cur.execute("""
-                INSERT INTO flashcards (front, back, topic_id, source_ref)
-                VALUES (?, ?, ?, ?)
-            """, (
-                card["front"],
-                card["back"],
-                topic_id,
-                card["source_ref"]
-            ))
+            result = cur.fetchone()
+            if result:
+                topic_id = result[0]
+                
+                cur.execute("""
+                    INSERT INTO flashcards (front, back, topic_id, source_ref)
+                    VALUES (?, ?, ?, ?)
+                """, (
+                    card["front"],
+                    card["back"],
+                    topic_id,
+                    card.get("source_ref", "")
+                ))
         
         conn.commit()
+        print(f"Successfully loaded seed data: {len(topics_data)} topics, {len(mcq_data)} MCQs, {len(saq_data)} SAQs, {len(flashcards_data)} flashcards")
         
     except Exception as e:
         print(f"Error loading seed data: {e}")
+        import traceback
+        traceback.print_exc()
 
 # Routes
 @app.route('/test')
