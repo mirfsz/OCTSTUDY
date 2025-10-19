@@ -23,6 +23,22 @@ def get_db_connection():
         print(f"Database connection error: {e}")
         return None
 
+def check_database_initialized():
+    """Check if database has been initialized with data"""
+    conn = get_db_connection()
+    if not conn:
+        return False
+    
+    try:
+        cur = conn.cursor()
+        cur.execute("SELECT COUNT(*) FROM topics")
+        count = cur.fetchone()[0]
+        return count > 0
+    except:
+        return False
+    finally:
+        conn.close()
+
 def init_database():
     """Initialize database tables and seed data"""
     conn = get_db_connection()
@@ -246,6 +262,10 @@ def index():
     """Home dashboard with weak topics"""
     user_id = session.get('user_id', 'local-user')
     
+    # Ensure database is initialized
+    if not check_database_initialized():
+        init_database()
+    
     conn = get_db_connection()
     if not conn:
         return "Database connection failed", 500
@@ -260,7 +280,10 @@ def index():
                                THEN CAST(p.correct_count AS FLOAT) / (p.correct_count + p.wrong_count) 
                                ELSE 0 END), 0) as accuracy
             FROM topics t
-            LEFT JOIN progress p ON t.id = p.topic_id AND p.user_id = ?
+            LEFT JOIN mcq m ON t.id = m.topic_id
+            LEFT JOIN saq s ON t.id = s.topic_id
+            LEFT JOIN progress p ON ((p.item_type = 'mcq' AND p.item_id = m.id) OR 
+                                    (p.item_type = 'saq' AND p.item_id = s.id)) AND p.user_id = ?
             GROUP BY t.id, t.name
             HAVING COALESCE(AVG(CASE WHEN p.correct_count + p.wrong_count > 0 
                            THEN CAST(p.correct_count AS FLOAT) / (p.correct_count + p.wrong_count) 
@@ -282,6 +305,10 @@ def index():
 def drill_mcq():
     """Start MCQ drill"""
     user_id = session.get('user_id', 'local-user')
+    
+    # Ensure database is initialized
+    if not check_database_initialized():
+        init_database()
     
     conn = get_db_connection()
     if not conn:
@@ -371,6 +398,10 @@ def submit_mcq_answer():
 @app.route('/practice/saq')
 def practice_saq():
     """Get random SAQ scenario"""
+    # Ensure database is initialized
+    if not check_database_initialized():
+        init_database()
+    
     conn = get_db_connection()
     if not conn:
         return "Database connection failed", 500
@@ -421,6 +452,10 @@ def cheats():
     """Flashcards by topic"""
     topic = request.args.get('topic', 'all')
     
+    # Ensure database is initialized
+    if not check_database_initialized():
+        init_database()
+    
     conn = get_db_connection()
     if not conn:
         return "Database connection failed", 500
@@ -463,6 +498,10 @@ def review():
     """Review mistakes and weak areas"""
     user_id = session.get('user_id', 'local-user')
     
+    # Ensure database is initialized
+    if not check_database_initialized():
+        init_database()
+    
     conn = get_db_connection()
     if not conn:
         return "Database connection failed", 500
@@ -475,9 +514,9 @@ def review():
             SELECT p.*, t.name as topic_name,
                    CASE WHEN p.item_type = 'mcq' THEN m.stem ELSE s.prompt END as content
             FROM progress p
-            JOIN topics t ON p.topic_id = t.id
             LEFT JOIN mcq m ON p.item_type = 'mcq' AND m.id = p.item_id
             LEFT JOIN saq s ON p.item_type = 'saq' AND s.id = p.item_id
+            LEFT JOIN topics t ON (m.topic_id = t.id OR s.topic_id = t.id)
             WHERE p.user_id = ? 
             AND p.correct_count + p.wrong_count > 0
             AND CAST(p.correct_count AS FLOAT) / (p.correct_count + p.wrong_count) < 0.8
