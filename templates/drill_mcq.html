@@ -163,6 +163,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const questions = document.querySelectorAll('.question-item');
     if (questions.length === 0) return;
     
+    const SESSION_KEY = 'mcq_drill_session';
     const currentQuestionSpan = document.getElementById('currentQuestion');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
@@ -171,10 +172,27 @@ document.addEventListener('DOMContentLoaded', function() {
     const correctDisplay = document.getElementById('correctDisplay');
     const wrongDisplay = document.getElementById('wrongDisplay');
     
-    let currentQuestionIndex = 0;
-    let answers = {};
-    let correctCount = 0;
-    let wrongCount = 0;
+    // Load saved session or start fresh
+    let session = JSON.parse(localStorage.getItem(SESSION_KEY) || '{}');
+    let currentQuestionIndex = session.currentIndex || 0;
+    let answers = session.answers || {};
+    let correctCount = session.correctCount || 0;
+    let wrongCount = session.wrongCount || 0;
+    
+    // Restore display
+    if (correctCount > 0) correctDisplay.textContent = correctCount;
+    if (wrongCount > 0) wrongDisplay.textContent = wrongCount;
+    
+    // Save session function
+    function saveSession() {
+        localStorage.setItem(SESSION_KEY, JSON.stringify({
+            currentIndex: currentQuestionIndex,
+            answers: answers,
+            correctCount: correctCount,
+            wrongCount: wrongCount,
+            timestamp: Date.now()
+        }));
+    }
 
     function showQuestion(index) {
         questions.forEach((q, i) => {
@@ -294,6 +312,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Update progress bar
         updateProgressBar();
+        
+        // Save session
+        saveSession();
 
         // Hide submit button
         const submitBtn = questionElem.querySelector('.submit-btn');
@@ -341,6 +362,9 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
 
+        // Clear session
+        localStorage.removeItem(SESSION_KEY);
+
         // Show results
         document.getElementById('correctCount').textContent = correctCount;
         document.getElementById('wrongCount').textContent = wrongCount;
@@ -387,8 +411,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Initialize
-    showQuestion(0);
+    // Initialize - restore progress and show current question
+    updateProgressBar();
+    showQuestion(currentQuestionIndex);
 });
 </script>
 {% endblock %}

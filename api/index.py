@@ -274,7 +274,7 @@ def index():
         cur.execute("SELECT COUNT(*) FROM topics")
         total_topics = cur.fetchone()[0]
         
-        # Get user progress
+        # Get user progress - MCQ specific
         cur.execute("""
             SELECT COUNT(DISTINCT item_id) 
             FROM progress 
@@ -282,6 +282,20 @@ def index():
         """, (user_id,))
         mcq_completed = cur.fetchone()[0]
         
+        cur.execute("""
+            SELECT 
+                SUM(correct_count) as correct,
+                SUM(wrong_count) as wrong
+            FROM progress 
+            WHERE user_id = ? AND item_type = 'mcq'
+        """, (user_id,))
+        result = cur.fetchone()
+        mcq_correct = result[0] or 0
+        mcq_wrong = result[1] or 0
+        mcq_attempts = mcq_correct + mcq_wrong
+        mcq_accuracy = mcq_correct / mcq_attempts if mcq_attempts > 0 else 0
+        
+        # Get user progress - SAQ specific
         cur.execute("""
             SELECT COUNT(DISTINCT item_id) 
             FROM progress 
@@ -294,13 +308,18 @@ def index():
                 SUM(correct_count) as correct,
                 SUM(wrong_count) as wrong
             FROM progress 
-            WHERE user_id = ?
+            WHERE user_id = ? AND item_type = 'saq'
         """, (user_id,))
         result = cur.fetchone()
-        correct = result[0] or 0
-        wrong = result[1] or 0
-        total_attempts = correct + wrong
-        accuracy = correct / total_attempts if total_attempts > 0 else 0
+        saq_correct = result[0] or 0
+        saq_wrong = result[1] or 0
+        saq_attempts = saq_correct + saq_wrong
+        saq_accuracy = saq_correct / saq_attempts if saq_attempts > 0 else 0
+        
+        # Combined stats
+        total_correct = mcq_correct + saq_correct
+        total_attempts = mcq_attempts + saq_attempts
+        overall_accuracy = total_correct / total_attempts if total_attempts > 0 else 0
         
         cur.execute("""
             SELECT COUNT(DISTINCT t.id)
@@ -317,10 +336,16 @@ def index():
             'total_flashcards': total_flashcards,
             'total_topics': total_topics,
             'mcq_completed': mcq_completed,
+            'mcq_correct': mcq_correct,
+            'mcq_attempts': mcq_attempts,
+            'mcq_accuracy': mcq_accuracy,
             'saq_completed': saq_completed,
-            'correct': correct,
+            'saq_correct': saq_correct,
+            'saq_attempts': saq_attempts,
+            'saq_accuracy': saq_accuracy,
+            'correct': total_correct,
             'total': total_attempts,
-            'accuracy': accuracy,
+            'accuracy': overall_accuracy,
             'topics_practiced': topics_practiced
         }
         
