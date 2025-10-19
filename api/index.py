@@ -301,7 +301,9 @@ def index():
         return render_template('index.html', weak_topics=weak_topics)
         
     except Exception as e:
+        import traceback
         print(f"Error in index: {e}")
+        print(traceback.format_exc())
         return f"Error loading dashboard: {str(e)}", 500
     finally:
         conn.close()
