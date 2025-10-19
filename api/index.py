@@ -1,7 +1,6 @@
 import os
 import json
-import psycopg
-from psycopg.rows import dict_row
+import sqlite3
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for
 from werkzeug.security import generate_password_hash, check_password_hash
 import uuid
@@ -13,15 +12,12 @@ app.secret_key = os.environ.get('SECRET_KEY', 'dev-secret-key-change-in-producti
 
 # Database connection
 def get_db_connection():
-    """Get database connection using Vercel Postgres"""
+    """Get database connection using SQLite"""
     try:
-        conn = psycopg.connect(
-            host=os.environ.get('POSTGRES_HOST'),
-            dbname=os.environ.get('POSTGRES_DATABASE'),
-            user=os.environ.get('POSTGRES_USER'),
-            password=os.environ.get('POSTGRES_PASSWORD'),
-            port=os.environ.get('POSTGRES_PORT', 5432)
-        )
+        # Use /tmp directory for Vercel serverless environment
+        db_path = os.path.join('/tmp', 'study_coach.db')
+        conn = sqlite3.connect(db_path)
+        conn.row_factory = sqlite3.Row  # Enable dict-like access
         return conn
     except Exception as e:
         print(f"Database connection error: {e}")
@@ -39,50 +35,50 @@ def init_database():
         # Create tables
         cur.execute("""
             CREATE TABLE IF NOT EXISTS topics (
-                id SERIAL PRIMARY KEY,
-                name VARCHAR(255) UNIQUE NOT NULL
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT UNIQUE NOT NULL
             );
         """)
         
         cur.execute("""
             CREATE TABLE IF NOT EXISTS mcq (
-                id SERIAL PRIMARY KEY,
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
                 stem TEXT NOT NULL,
                 choices_json TEXT NOT NULL,
                 answer_idx INTEGER NOT NULL,
                 explanation TEXT,
                 topic_id INTEGER NOT NULL REFERENCES topics(id),
-                source_ref VARCHAR(255)
+                source_ref TEXT
             );
         """)
         
         cur.execute("""
             CREATE TABLE IF NOT EXISTS saq (
-                id SERIAL PRIMARY KEY,
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
                 prompt TEXT NOT NULL,
                 model_outline TEXT NOT NULL,
                 keywords_json TEXT NOT NULL,
                 statute_refs_json TEXT,
                 topic_id INTEGER NOT NULL REFERENCES topics(id),
-                source_ref VARCHAR(255)
+                source_ref TEXT
             );
         """)
         
         cur.execute("""
             CREATE TABLE IF NOT EXISTS flashcards (
-                id SERIAL PRIMARY KEY,
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
                 front TEXT NOT NULL,
                 back TEXT NOT NULL,
                 topic_id INTEGER NOT NULL REFERENCES topics(id),
-                source_ref VARCHAR(255)
+                source_ref TEXT
             );
         """)
         
         cur.execute("""
             CREATE TABLE IF NOT EXISTS progress (
-                id SERIAL PRIMARY KEY,
-                user_id VARCHAR(255) NOT NULL,
-                item_type VARCHAR(10) CHECK(item_type IN ('mcq','saq')),
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_id TEXT NOT NULL,
+                item_type TEXT CHECK(item_type IN ('mcq','saq')),
                 item_id INTEGER NOT NULL,
                 correct_count INTEGER DEFAULT 0,
                 wrong_count INTEGER DEFAULT 0,
@@ -94,9 +90,9 @@ def init_database():
         
         cur.execute("""
             CREATE TABLE IF NOT EXISTS sessions (
-                id SERIAL PRIMARY KEY,
-                user_id VARCHAR(255),
-                mode VARCHAR(50),
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_id TEXT,
+                mode TEXT,
                 started_at TIMESTAMP,
                 ended_at TIMESTAMP,
                 score_json TEXT
@@ -141,7 +137,7 @@ def load_seed_data(conn):
         ]
         
         for topic in topics_data:
-            cur.execute("INSERT INTO topics (name) VALUES (%s) ON CONFLICT (name) DO NOTHING", (topic["name"],))
+            cur.execute("INSERT OR IGNORE INTO topics (name) VALUES (?)", (topic["name"],))
         
         conn.commit()
         
@@ -166,12 +162,12 @@ def load_seed_data(conn):
         ]
         
         for mcq in sample_mcqs:
-            cur.execute("SELECT id FROM topics WHERE name = %s", (mcq["topic_name"],))
+            cur.execute("SELECT id FROM topics WHERE name = ?", (mcq["topic_name"],))
             topic_id = cur.fetchone()[0]
             
             cur.execute("""
                 INSERT INTO mcq (stem, choices_json, answer_idx, explanation, topic_id, source_ref)
-                VALUES (%s, %s, %s, %s, %s, %s)
+                VALUES (?, ?, ?, ?, ?, ?)
             """, (
                 mcq["stem"],
                 json.dumps(mcq["choices"]),
@@ -194,12 +190,12 @@ def load_seed_data(conn):
         ]
         
         for saq in sample_saqs:
-            cur.execute("SELECT id FROM topics WHERE name = %s", (saq["topic_name"],))
+            cur.execute("SELECT id FROM topics WHERE name = ?", (saq["topic_name"],))
             topic_id = cur.fetchone()[0]
             
             cur.execute("""
                 INSERT INTO saq (prompt, model_outline, keywords_json, statute_refs_json, topic_id, source_ref)
-                VALUES (%s, %s, %s, %s, %s, %s)
+                VALUES (?, ?, ?, ?, ?, ?)
             """, (
                 saq["prompt"],
                 saq["model_outline"],
@@ -226,12 +222,12 @@ def load_seed_data(conn):
         ]
         
         for card in sample_flashcards:
-            cur.execute("SELECT id FROM topics WHERE name = %s", (card["topic_name"],))
+            cur.execute("SELECT id FROM topics WHERE name = ?", (card["topic_name"],))
             topic_id = cur.fetchone()[0]
             
             cur.execute("""
                 INSERT INTO flashcards (front, back, topic_id, source_ref)
-                VALUES (%s, %s, %s, %s)
+                VALUES (?, ?, ?, ?)
             """, (
                 card["front"],
                 card["back"],
@@ -255,24 +251,24 @@ def index():
         return "Database connection failed", 500
     
     try:
-        cur = conn.cursor(row_factory=dict_row)
+        cur = conn.cursor()
         
         # Get weak topics (topics with < 80% accuracy)
         cur.execute("""
             SELECT t.name, 
                    COALESCE(AVG(CASE WHEN p.correct_count + p.wrong_count > 0 
-                               THEN p.correct_count::float / (p.correct_count + p.wrong_count) 
+                               THEN CAST(p.correct_count AS FLOAT) / (p.correct_count + p.wrong_count) 
                                ELSE 0 END), 0) as accuracy
             FROM topics t
-            LEFT JOIN progress p ON t.id = p.topic_id AND p.user_id = %s
+            LEFT JOIN progress p ON t.id = p.topic_id AND p.user_id = ?
             GROUP BY t.id, t.name
             HAVING COALESCE(AVG(CASE WHEN p.correct_count + p.wrong_count > 0 
-                           THEN p.correct_count::float / (p.correct_count + p.wrong_count) 
+                           THEN CAST(p.correct_count AS FLOAT) / (p.correct_count + p.wrong_count) 
                            ELSE 0 END), 0) < 0.8
             ORDER BY accuracy ASC
         """, (user_id,))
         
-        weak_topics = cur.fetchall()
+        weak_topics = [dict(row) for row in cur.fetchall()]
         
         return render_template('index.html', weak_topics=weak_topics)
         
@@ -292,20 +288,20 @@ def drill_mcq():
         return "Database connection failed", 500
     
     try:
-        cur = conn.cursor(row_factory=dict_row)
+        cur = conn.cursor()
         
         # Get questions (60% weak topics, 40% random)
         cur.execute("""
             SELECT m.*, t.name as topic_name
             FROM mcq m
             JOIN topics t ON m.topic_id = t.id
-            LEFT JOIN progress p ON m.id = p.item_id AND p.item_type = 'mcq' AND p.user_id = %s
+            LEFT JOIN progress p ON m.id = p.item_id AND p.item_type = 'mcq' AND p.user_id = ?
             WHERE p.correct_count + p.wrong_count < 5 OR p.correct_count + p.wrong_count IS NULL
             ORDER BY RANDOM()
             LIMIT 10
         """, (user_id,))
         
-        questions = cur.fetchall()
+        questions = [dict(row) for row in cur.fetchall()]
         
         # Convert choices_json to list
         for q in questions:
@@ -336,7 +332,7 @@ def submit_mcq_answer():
         cur = conn.cursor()
         
         # Get correct answer
-        cur.execute("SELECT answer_idx FROM mcq WHERE id = %s", (question_id,))
+        cur.execute("SELECT answer_idx FROM mcq WHERE id = ?", (question_id,))
         correct_answer = cur.fetchone()[0]
         
         is_correct = selected_answer == correct_answer
@@ -344,16 +340,16 @@ def submit_mcq_answer():
         # Update progress
         cur.execute("""
             INSERT INTO progress (user_id, item_type, item_id, correct_count, wrong_count, box, last_seen_at)
-            VALUES (%s, 'mcq', %s, %s, %s, 1, NOW())
+            VALUES (?, 'mcq', ?, ?, ?, 1, datetime('now'))
             ON CONFLICT (user_id, item_type, item_id)
             DO UPDATE SET
-                correct_count = progress.correct_count + %s,
-                wrong_count = progress.wrong_count + %s,
+                correct_count = progress.correct_count + ?,
+                wrong_count = progress.wrong_count + ?,
                 box = CASE 
-                    WHEN %s THEN LEAST(progress.box + 1, 5)
-                    ELSE GREATEST(progress.box - 1, 1)
+                    WHEN ? THEN MIN(progress.box + 1, 5)
+                    ELSE MAX(progress.box - 1, 1)
                 END,
-                last_seen_at = NOW()
+                last_seen_at = datetime('now')
         """, (user_id, question_id, 
               1 if is_correct else 0, 0 if is_correct else 1,
               1 if is_correct else 0, 0 if is_correct else 1,
@@ -380,7 +376,7 @@ def practice_saq():
         return "Database connection failed", 500
     
     try:
-        cur = conn.cursor(row_factory=dict_row)
+        cur = conn.cursor()
         
         cur.execute("""
             SELECT s.*, t.name as topic_name
@@ -430,7 +426,7 @@ def cheats():
         return "Database connection failed", 500
     
     try:
-        cur = conn.cursor(row_factory=dict_row)
+        cur = conn.cursor()
         
         if topic == 'all':
             cur.execute("""
@@ -444,11 +440,11 @@ def cheats():
                 SELECT f.*, t.name as topic_name
                 FROM flashcards f
                 JOIN topics t ON f.topic_id = t.id
-                WHERE t.name = %s
+                WHERE t.name = ?
                 ORDER BY f.id
             """, (topic,))
         
-        flashcards = cur.fetchall()
+        flashcards = [dict(row) for row in cur.fetchall()]
         
         # Get all topics for filter
         cur.execute("SELECT name FROM topics ORDER BY name")
@@ -472,7 +468,7 @@ def review():
         return "Database connection failed", 500
     
     try:
-        cur = conn.cursor(row_factory=dict_row)
+        cur = conn.cursor()
         
         # Get items with low accuracy
         cur.execute("""
@@ -482,13 +478,13 @@ def review():
             JOIN topics t ON p.topic_id = t.id
             LEFT JOIN mcq m ON p.item_type = 'mcq' AND m.id = p.item_id
             LEFT JOIN saq s ON p.item_type = 'saq' AND s.id = p.item_id
-            WHERE p.user_id = %s 
+            WHERE p.user_id = ? 
             AND p.correct_count + p.wrong_count > 0
-            AND p.correct_count::float / (p.correct_count + p.wrong_count) < 0.8
-            ORDER BY p.correct_count::float / (p.correct_count + p.wrong_count) ASC
+            AND CAST(p.correct_count AS FLOAT) / (p.correct_count + p.wrong_count) < 0.8
+            ORDER BY CAST(p.correct_count AS FLOAT) / (p.correct_count + p.wrong_count) ASC
         """, (user_id,))
         
-        weak_items = cur.fetchall()
+        weak_items = [dict(row) for row in cur.fetchall()]
         
         return render_template('review.html', weak_items=weak_items)
         
