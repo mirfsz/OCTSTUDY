@@ -398,5 +398,13 @@
     "explanation": "S420: Cheating and dishonestly inducing delivery of property. Punishment up to 10 years.",
     "topic_name": "Scams",
     "source_ref": "Scams Manual"
+  },
+  {
+    "stem": "Inner cordon in major incident - purpose?",
+    "choices": ["Prevent unauthorized entry and preserve evidence", "Only crowd control", "Only treat casualties", "Evacuate everyone"],
+    "answer_idx": 0,
+    "explanation": "Inner cordon prevents unauthorized entry, preserves scene for evidence, contains casualties for treatment. Outer cordon manages perimeter.",
+    "topic_name": "Major Incidents",
+    "source_ref": "MCQ 2019"
   }
 ]
