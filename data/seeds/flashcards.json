@@ -1,74 +1,247 @@
 [
   {
-    "front": "BWC 10 Exceptions",
-    "back": "1. Personal hygiene\n2. Medical emergencies\n3. Undercover operations\n4. Victim interviews\n5. Witness protection\n6. Family disputes\n7. Mental health calls\n8. Juvenile interviews\n9. Sexual offences\n10. National security",
-    "topic_name": "BWC",
-    "source_ref": "BWC Manual"
+    "front": "What are the 10 BWC exceptions?",
+    "back": "1. Sexual offences\n2. Secured areas/systems\n3. Pumping petrol/flammable areas\n4. Doctor examination/toilet/shower at hospital\n5. Consuming Official Ease (OE)\n6. Personal communications unrelated to work\n7. Diplomat with immunity requests\n8. Consensual conversation in public - MOP requests stop\n9. Anti-crime rounds in private places with recording restrictions\n10. Non-crime incidents in private places not open to public",
+    "topic_name": "BWC"
   },
   {
-    "front": "SALUTE Format",
-    "back": "S - Size (number of subjects)\nA - Activity (what they're doing)\nL - Location (specific address/landmark)\nU - Unit (your unit/identifier)\nT - Time (current time)\nE - Equipment (weapons/vehicles)",
-    "topic_name": "SALUTE",
-    "source_ref": "SALUTE Guidelines"
+    "front": "What are the 3 NWD (No Wrong Door) pre-checks?",
+    "back": "1. Is there immediate threat to life or property?\n2. Is there an offence revealed?\n3. Is the offence under police purview?\n\nIf all NO → Assess, Advise relevant agency, Refer",
+    "topic_name": "NWD"
   },
   {
-    "front": "ACTive-PUNCH Framework",
-    "back": "A - Assess the situation\nC - Communicate clearly\nT - Take appropriate action\n\nP - Protect yourself\nU - Use minimum force\nN - Notify supervisor\nC - Control the scene\nH - Help the victim",
-    "topic_name": "AOJ",
-    "source_ref": "Use of Force Manual"
+    "front": "AVS 24-hour hotline for animal incidents?",
+    "back": "1800-476-1600\n\nAVS coordinates ALL animal-related issues. No need to contact SPCA, ACRES separately.",
+    "topic_name": "Wildlife Incidents"
   },
   {
-    "front": "NWD Pre-checks (3 Questions)",
-    "back": "1. Is the person who they claim to be?\n2. Are they wanted for any offences?\n3. Are there any other relevant matters?",
-    "topic_name": "NWD",
-    "source_ref": "NWD Procedures"
+    "front": "SALUTE reporting format",
+    "back": "S - Size (number of attackers/casualties)\nA - Activity (what doing/condition)\nL - Location (where/heading)\nU - Unit (reporting unit)\nT - Time (when last sighted)\nE - Equipment (weapons/hazards)\n\nPriority: Location + Time first for containment",
+    "topic_name": "SALUTE"
   },
   {
-    "front": "AVS 24-hr Hotline",
-    "back": "1800-476-1600\n\nFor wildlife incidents:\n- Wild boars\n- Snakes\n- Monkeys\n- Other dangerous animals",
-    "topic_name": "Wildlife Incidents",
-    "source_ref": "AVS Guidelines"
+    "front": "AOJ principles for Use of Force",
+    "back": "A - Ability (capability to cause death/GH)\nO - Opportunity (proximity/means to harm)\nJ - Jeopardy (imminent threat demonstrated)\n\nALL THREE must be present to use lethal force",
+    "topic_name": "Use of Force"
   },
   {
-    "front": "Sec 420 Elements",
-    "back": "1. Deception (dishonest or fraudulent)\n2. Inducing person to deliver property\n3. Causing wrongful loss to another\n4. Causing wrongful gain to self",
-    "topic_name": "Scams",
-    "source_ref": "Penal Code"
+    "front": "3 principles of Use of Force",
+    "back": "1. LEGALITY - Use force according to law\n2. PROPORTIONALITY - Force proportionate to threat perceived\n3. SAFETY - Consider safety of public and officers\n\nMust satisfy all three principles",
+    "topic_name": "Use of Force"
   },
   {
-    "front": "Use of Force Levels",
-    "back": "1. Presence (officer presence)\n2. Verbal commands\n3. Empty hand techniques\n4. Chemical agents\n5. Impact weapons\n6. Lethal force",
-    "topic_name": "Use of Force",
-    "source_ref": "Use of Force Guidelines"
+    "front": "Mission of first responders in armed attack",
+    "back": "1. STOP THE KILLING - contain or neutralise threat\n2. STOP THE DYING - initiate and facilitate SCDF rescue operations\n\nPrimary focus is saving lives",
+    "topic_name": "Armed Attacks"
   },
   {
-    "front": "Roadblock Roles",
-    "back": "Stopper:\n- Stop vehicles\n- Direct traffic\n- Maintain safety\n\nChecker:\n- Examine documents\n- Conduct checks\n- Question occupants",
-    "topic_name": "Roadblock",
-    "source_ref": "Roadblock Procedures"
+    "front": "FRC equipment for armed attack",
+    "back": "PPE:\n- Ballistic/Anti-Stab Body Armour Vest (BRV)\n- NIJ Level IV Armour Plates\n- NIJ Level IIIA Helmet (BRH)\n- Polycarbonate Riot Shield\n\nProtects against knives, slashes, projectiles",
+    "topic_name": "Armed Attacks"
   },
   {
-    "front": "Exhibit Chain of Custody",
-    "back": "1. Collect immediately\n2. Seal in presence of witness\n3. Label with details\n4. Store securely\n5. Document all transfers\n6. Maintain continuity",
-    "topic_name": "Exhibits",
-    "source_ref": "Exhibit Handling Procedures"
+    "front": "What is CCP in armed attack?",
+    "back": "Casualty Collection Point\n\n- Safe room in WARM zone\n- Minimal entry/exit points\n- Visually checked free of threats\n- Armed officer MUST guard it\n- Temporary holding for casualties before SCDF treatment",
+    "topic_name": "Armed Attacks"
   },
   {
-    "front": "Constitutional Rights (Article 9)",
-    "back": "Right to:\n- Personal liberty\n- Due process\n- Equal protection\n- Freedom from arbitrary arrest\n- Legal representation",
-    "topic_name": "Constitutional Rights",
-    "source_ref": "Constitution"
+    "front": "Facilitated rescue - 2 concepts",
+    "back": "1. MOBILE PROTECTION TEAM\n- SPF provide front/back cover for SCDF\n- Stay close together\n- At least 2 SPF officers\n- SPF move WITH SCDF\n\n2. LINKMAN\n- Chain of SPF within line of sight\n- SCDF move along chain\n- SPF static, SCDF mobile",
+    "topic_name": "Armed Attacks"
   },
   {
-    "front": "Offensive Weapons (S453 PC)",
-    "back": "Any article made or adapted for:\n- Causing injury to person\n- Disabling or disfiguring\n- Threatening with injury\n\nExamples: Knives, clubs, chains",
-    "topic_name": "Offensive Weapons",
-    "source_ref": "Penal Code"
+    "front": "CA incident - approaching scene actions",
+    "back": "Within 200m:\n- Turn OFF aircon\n- WIND UP windows\n- Place escape hoods/NBC suits in passenger compartment\n- Coordinate route via POCC\n- DON'T park near building entrances/windows/exhaust ducts",
+    "topic_name": "Chemical Agents"
   },
   {
-    "front": "Sexual Offence BWC Protocol",
-    "back": "1. Activate BWC immediately\n2. No exceptions apply\n3. Record entire interaction\n4. Protect victim privacy\n5. Secure evidence\n6. Follow SOP strictly",
-    "topic_name": "Sexual Offences",
-    "source_ref": "Sexual Offence Guidelines"
+    "front": "CA incident - positive indicators",
+    "back": "- Breathlessness\n- Teary eyes\n- Skin irritation\n- Nausea/vomiting\n- Collapsed casualties\n\nAction: Report to POCC, retreat 200m, don NBC suit, evacuate public to EAA",
+    "topic_name": "Chemical Agents"
+  },
+  {
+    "front": "Sec 420 Penal Code",
+    "back": "Cheating and dishonestly inducing delivery of property\n\nElements:\n1. Deception\n2. Dishonestly induced victim to deliver property\n3. Knew deception would induce delivery\n\nPunishment: Up to 10 years + fine\nArrestable offence",
+    "topic_name": "Scams"
+  },
+  {
+    "front": "Sec 416 + 419 Penal Code",
+    "back": "S416: Cheating by Personation - pretending to be someone else\n\nS419: Punishment for cheating by personation\n- Up to 5 years or fine or both\n\nExample: Fake police officer calling victim\nArrestable offence",
+    "topic_name": "Scams"
+  },
+  {
+    "front": "Computer Misuse Act S4(3)",
+    "back": "Access with intent to commit or facilitate commission of offence\n\nElements:\n- Cause computer to perform function\n- Secure access to data\n- With intent to commit offence (property, fraud, dishonesty, bodily harm)\n- Offence punishable min. 2 years\n\nPunishment: $50,000 or 10 years or both",
+    "topic_name": "Computer Misuse Act"
+  },
+  {
+    "front": "Scam prevention - KEY advice",
+    "back": "NEVER GIVE:\n- Personal details (NRIC, DOB, address)\n- Bank/credit card details\n- Passwords/PIN codes\n- OTP codes\n\nGovernment/banks NEVER ask for these over phone!\n\nIf unsolicited call - hang up, call official hotline",
+    "topic_name": "Scams"
+  },
+  {
+    "front": "Moneylenders Act S28(1)",
+    "back": "UML Harassment - Harassment by unlicensed moneylender\n\nExamples:\n- Locking gate (wrongful confinement)\n- Splashing paint\n- Scribbling O$P$ with unit/phone\n- Harassment phone calls\n\nArrestable offence",
+    "topic_name": "UML"
+  },
+  {
+    "front": "UML case - advice to victim",
+    "back": "DO NOT PAY - shows vulnerability, may not stop\n\nAdvice:\n- Step up patrols arranged\n- Call NPC if suspicious persons\n- Join NWG/COP\n- Install CCTV (needs HDB approval + police report)\n- UML Task Force IO contact provided",
+    "topic_name": "UML"
+  },
+  {
+    "front": "Sec 290 Penal Code",
+    "back": "Public Nuisance - act causing common injury/danger/annoyance to public\n\nAggravating factors:\n- Public place\n- In view of public\n- Causes public annoyance/inconvenience\n\nArrestable offence\nUse to arrest for non-arrestable offences with aggravating factors",
+    "topic_name": "Dispute Management"
+  },
+  {
+    "front": "Sec 323 Penal Code",
+    "back": "Voluntarily Causing Hurt (VCH)\n\nIntentionally causing bodily pain/injury\n\nNON-arrestable offence\n\nAction: Advise magistrate complaint if no aggravating factors",
+    "topic_name": "Dispute Management"
+  },
+  {
+    "front": "Sec 352 Penal Code",
+    "back": "Using Criminal Force\n\nIntentional use of force without consent, no hurt caused\n\nExamples: Pushing, spitting\n\nNON-arrestable offence",
+    "topic_name": "Dispute Management"
+  },
+  {
+    "front": "Sec 377BB(7) Penal Code",
+    "back": "Voyeurism\n\nObserving/recording person doing private act without consent\n- For sexual gratification OR\n- To cause humiliation\n\nPunishment: Up to 2 years, fine, caning, or combination\nArrestable offence\n\nUpdate SCDO within 30 min!",
+    "topic_name": "Sexual Offences"
+  },
+  {
+    "front": "Sec 354 Penal Code",
+    "back": "Outrage of Modesty\n\nIntentional act outraging modesty\n- ANY body part (not just private parts)\n- Without consent\n- With sexual intent\n\nArrestable offence",
+    "topic_name": "Sexual Offences"
+  },
+  {
+    "front": "SEI model for sexual offences",
+    "back": "S - SAFETY: Ensure victim safe\nE - EMOTIONS: Acknowledge trauma, show empathy\nI - INFORMATION: Elicit ONLY essential facts\n\n- Interview in PRIVACY\n- Update SCDO within 30 min\n- Lodge NP299 (mark sensitive)\n- Don't re-traumatize with excessive questions",
+    "topic_name": "Sexual Offences"
+  },
+  {
+    "front": "Sec 441 + 447 Penal Code",
+    "back": "S441: Criminal Trespass - entering/remaining on property with intent to commit offence or annoy\n\nS447: Punishment up to 3 months or $1500 fine or both\n\nArrestable offence",
+    "topic_name": "Criminal Trespass"
+  },
+  {
+    "front": "Sec 453(1) Penal Code",
+    "back": "Possession of house-breaking implements or offensive weapons\n\n- Instrument for stabbing/cutting\n- Weapon likely to cause death\n- Without lawful authority or purpose\n\nExemptions: SAF, SPF, SCDF members\n\nPunishment: Up to 2 years or fine or both\nArrestable",
+    "topic_name": "Offensive Weapons"
+  },
+  {
+    "front": "CESOWA S6(1)",
+    "back": "Carrying offensive weapons in public places\n\n- Any offensive weapon in public place\n- Without lawful authority or purpose\n- Onus on accused to prove lawful purpose\n\nPunishment: Up to 3 years + min. 6 strokes caning\nArrestable\n\n'Self-protection' is NOT lawful purpose!",
+    "topic_name": "Offensive Weapons"
+  },
+  {
+    "front": "National Registration Act S13(1)(d)",
+    "back": "Possessing another person's IC without lawful excuse\n\nExample: Holding friend's IC as loan security\n\nArrestable offence\nAction: Arrest and seize IC",
+    "topic_name": "National Registration Act"
+  },
+  {
+    "front": "Protection from Harassment Act S3",
+    "back": "Intentional Harassment\n\nIntentionally causing harassment, alarm, distress\n\nExample: Posting abusive remarks with victim's contact on social media\n\nArrestable offence",
+    "topic_name": "PHA"
+  },
+  {
+    "front": "Article 9 Constitution - Arrested person rights",
+    "back": "Must be:\n1. Informed of REASONS for arrest\n2. Allowed to CONSULT and be defended by LAWYER\n3. Released OR brought before MAGISTRATE within 48 HOURS\n\nJourney time to court NOT counted",
+    "topic_name": "Constitutional Rights"
+  },
+  {
+    "front": "CPC S75(2) - Use of Force in arrest",
+    "back": "If person forcibly resists or tries to evade arrest:\n\nMay use ALL REASONABLE MEANS NECESSARY to make arrest\n\nMust be proportionate to threat",
+    "topic_name": "Arrest"
+  },
+  {
+    "front": "Consensual conversation vs Check",
+    "back": "CONSENSUAL:\n- No suspicion\n- Voluntary engagement\n- NO power to compel\n- Can walk away\n\nCHECK:\n- Reasonable suspicion of specific offence\n- Can demand particulars\n- Can search\n- Cannot just walk away",
+    "topic_name": "Patrol Duties"
+  },
+  {
+    "front": "Reasonable suspicion - factors",
+    "back": "Based on:\n1. Behavioral signs\n2. Signs displayed in conversation\n3. Environment\n4. Subject's background\n5. Totality of ALL circumstances\n\nMust be specific offence, not just 'suspicious'",
+    "topic_name": "Patrol Duties"
+  },
+  {
+    "front": "NP299 vs NP322",
+    "back": "NP299:\n- First Information Report (FIR)\n- Crime disclosed\n- Investigation required\n\nNP322:\n- Loss report\n- No crime witnessed\n- No suspect\n- Administrative record",
+    "topic_name": "Reports"
+  },
+  {
+    "front": "NP168 Traffic Accident Report - when required for non-injury?",
+    "back": "Non-injury cases requiring NP168:\n1. Foreign vehicle involved\n2. Pedestrian/cyclist involved\n3. Hit-and-run\n4. Police vehicle involved\n\nAll other non-injury: Notice of Reporting only",
+    "topic_name": "Traffic"
+  },
+  {
+    "front": "Exhibits - NP323",
+    "back": "Acknowledgement slip for seized property\n\nIssue to:\n- OWNER of stolen/seized items (NOT suspect)\n- Official documentation of seizure\n\nKeep duplicate for case file",
+    "topic_name": "Exhibits"
+  },
+  {
+    "front": "Statement recording - Inadmissible confessions",
+    "back": "Confession NOT admissible if obtained through:\n- INDUCEMENT\n- PROMISE\n- THREAT\n- OPPRESSION\n\nMust be VOLUNTARY\n\nExample: 'Admit and I'll only warn you' = promise",
+    "topic_name": "Statement Recording"
+  },
+  {
+    "front": "PGO A10 - Conflicts of interest",
+    "back": "Officers MUST NOT:\n- Accept gifts/discounts from persons in cases attended\n- Engage in business with complainants/suspects\n- Use position for personal gain\n\nMaintains professional integrity",
+    "topic_name": "PGO"
+  },
+  {
+    "front": "Casino visit declaration",
+    "back": "Even if NOT under restrictions:\n\nMust inform Commander/Director IN WRITING through supervisor WITHIN 4 WEEKS of visit\n\nEnsures transparency",
+    "topic_name": "PGO"
+  },
+  {
+    "front": "BWC footage - who can view?",
+    "back": "Footage is confidential\n\nMOP can view ONLY:\n- At NPC\n- With Commanding Officer approval\n\nCannot view on scene\nNot automatically available to interested parties",
+    "topic_name": "BWC"
+  },
+  {
+    "front": "Blue Storm Major vs Red Storm",
+    "back": "Code words for major incidents requiring significant resources\n\nBLUE STORM MAJOR:\n- Major incident\n- Significant resources needed\n\nRED STORM:\n- Even larger scale\n- Maximum resources\n\nActivated by DOR/POCC",
+    "topic_name": "Major Incidents"
+  },
+  {
+    "front": "Ops Sudden Rush - Tier 2",
+    "back": "Tier 2 activation:\n- On-duty officers ONLY\n- Off-duty NOT activated\n\nReport to Incident Command Post\nLook for Ground Commander for deployment",
+    "topic_name": "Ops Sudden Rush"
+  },
+  {
+    "front": "Roadblock - Stopper role",
+    "back": "STOPPER:\n- Stop vehicles\n- Record particulars\n- Return ID\n- Direct to Check Zone if needed\n\nDO NOT walk ID to Check Zone - return to position immediately",
+    "topic_name": "Roadblock"
+  },
+  {
+    "front": "Drink driving - RTA S69(5)",
+    "back": "S69(5)(b): Arrest if fail/refuse breathalyzer\n→ Escort to HOSPITAL for blood test\n\nS69(5)(c): Arrest if can't provide breath sample\n→ Escort to STATION for BEA test\n\nMedical condition NOT an excuse",
+    "topic_name": "Traffic"
+  },
+  {
+    "front": "Theft vs Theft in Dwelling",
+    "back": "THEFT (S379): General theft\n\nTHEFT IN DWELLING (S380): Theft from building used for dwelling/custody of property/worship\n\nExample: Shoplifting = Theft in Dwelling\n\nBoth arrestable",
+    "topic_name": "Theft"
+  },
+  {
+    "front": "Common intention - S34 Penal Code",
+    "back": "When 2+ persons share common intention:\n\nEach liable for CRIMINAL ACT done in furtherance of common intention\n\nExample: 3 rob store, 1 shoots cashier → ALL liable for murder\n\nMust have shared the criminal intent",
+    "topic_name": "Common Intention"
+  },
+  {
+    "front": "Crime scene photography - small objects",
+    "back": "For objects <15mm:\n\n1st photo: CLOSE-UP of object\n2nd photo: Object's LOCATION in relation to scene\n\nProvides context and detail",
+    "topic_name": "Crime Scene Photography"
+  },
+  {
+    "front": "Diplomatic immunity - What to do?",
+    "back": "If claims diplomatic immunity but no ID:\n\n1. Record particulars verbally\n2. Convey to DOR\n3. DOR verifies with Ministry of Foreign Affairs (MFA)\n4. Wait for verification before action\n\nDO NOT arrest without verification",
+    "topic_name": "Diplomatic Immunity"
+  },
+  {
+    "front": "ACTive-PUNCH framework",
+    "back": "Decision framework for arrest in non-arrestable offences:\n\nA - Aggravating factors\nC - Context\nT - Totality\nive\n\nP - Public place\nU - Unreasonable behavior\nN - Nuisance to public\nC - Continuing offense\nH - Hindering investigation\n\nIf aggravating factors present → Can arrest under S290 Public Nuisance",
+    "topic_name": "Dispute Management"
   }
 ]
