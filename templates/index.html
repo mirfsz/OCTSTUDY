@@ -1,30 +1,121 @@
 {% extends "base.html" %}
 
-{% block title %}Dashboard - SPF Study Coach{% endblock %}
+{% block title %}Dashboard - GRFan Study Buddy{% endblock %}
 
 {% block content %}
 <div class="px-4 py-6 sm:px-0">
     <div class="mb-8">
         <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Study Dashboard</h1>
-        <p class="mt-2 text-gray-600 dark:text-gray-400">Track your progress and focus on weak areas</p>
+        <p class="mt-2 text-gray-600 dark:text-gray-400">Track your progress and master key policing concepts</p>
     </div>
 
-    <!-- Weak Topics Section -->
+    <!-- Overall Stats -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg shadow-lg p-6 text-white">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-blue-100 text-sm font-medium">MCQs Completed</p>
+                    <p class="text-3xl font-bold mt-2">{{ stats.mcq_completed }}</p>
+                    <p class="text-blue-100 text-xs mt-1">of {{ stats.total_mcqs }} available</p>
+                </div>
+                <div class="bg-white bg-opacity-20 rounded-full p-3">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-gradient-to-br from-green-500 to-green-600 rounded-lg shadow-lg p-6 text-white">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-green-100 text-sm font-medium">Overall Accuracy</p>
+                    <p class="text-3xl font-bold mt-2">{{ "%.0f"|format(stats.accuracy * 100) }}%</p>
+                    <p class="text-green-100 text-xs mt-1">{{ stats.correct }}/{{ stats.total }} correct</p>
+                </div>
+                <div class="bg-white bg-opacity-20 rounded-full p-3">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg shadow-lg p-6 text-white">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-purple-100 text-sm font-medium">SAQs Practiced</p>
+                    <p class="text-3xl font-bold mt-2">{{ stats.saq_completed }}</p>
+                    <p class="text-purple-100 text-xs mt-1">of {{ stats.total_saqs }} scenarios</p>
+                </div>
+                <div class="bg-white bg-opacity-20 rounded-full p-3">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" clip-rule="evenodd"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-lg shadow-lg p-6 text-white">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-yellow-100 text-sm font-medium">Topics Covered</p>
+                    <p class="text-3xl font-bold mt-2">{{ stats.topics_practiced }}/{{ stats.total_topics }}</p>
+                    <p class="text-yellow-100 text-xs mt-1">{{ stats.total_flashcards }} flashcards ready</p>
+                </div>
+                <div class="bg-white bg-opacity-20 rounded-full p-3">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Topic Progress -->
+    {% if topic_progress %}
+    <div class="mb-8">
+        <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">📊 Your Topic Progress</h2>
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+            <div class="space-y-4">
+                {% for topic in topic_progress %}
+                <div>
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="flex items-center space-x-2">
+                            <span class="text-sm font-medium text-gray-900 dark:text-white">{{ topic.name }}</span>
+                            <span class="text-xs text-gray-500 dark:text-gray-400">({{ topic.attempts }} attempts)</span>
+                        </div>
+                        <span class="text-sm font-semibold {% if topic.accuracy >= 0.8 %}text-green-600 dark:text-green-400{% elif topic.accuracy >= 0.6 %}text-yellow-600 dark:text-yellow-400{% else %}text-red-600 dark:text-red-400{% endif %}">
+                            {{ "%.0f"|format(topic.accuracy * 100) }}%
+                        </span>
+                    </div>
+                    <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                        <div class="h-2 rounded-full transition-all {% if topic.accuracy >= 0.8 %}bg-green-500{% elif topic.accuracy >= 0.6 %}bg-yellow-500{% else %}bg-red-500{% endif %}" style="width: {{ topic.accuracy * 100 }}%"></div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Weak Topics Alert -->
     {% if weak_topics %}
     <div class="mb-8">
-        <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Focus Areas</h2>
+        <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">⚠️ Focus on These Topics</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {% for topic in weak_topics %}
-            <div class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4">
-                <div class="flex items-center justify-between">
-                    <h3 class="font-medium text-red-900 dark:text-red-100">{{ topic.name }}</h3>
-                    <span class="text-sm text-red-600 dark:text-red-400">
-                        {{ "%.1f"|format(topic.accuracy * 100) }}%
+            <div class="bg-red-50 dark:bg-red-900/20 border-2 border-red-200 dark:border-red-800 rounded-lg p-4 hover:shadow-md transition-shadow">
+                <div class="flex items-center justify-between mb-2">
+                    <h3 class="font-semibold text-red-900 dark:text-red-100">{{ topic.name }}</h3>
+                    <span class="text-sm font-bold text-red-600 dark:text-red-400">
+                        {{ "%.0f"|format(topic.accuracy * 100) }}%
                     </span>
                 </div>
-                <div class="mt-2 w-full bg-red-200 dark:bg-red-800 rounded-full h-2">
-                    <div class="bg-red-500 h-2 rounded-full" style="width: {{ topic.accuracy * 100 }}%"></div>
+                <div class="w-full bg-red-200 dark:bg-red-800 rounded-full h-2.5 mb-2">
+                    <div class="bg-red-600 dark:bg-red-500 h-2.5 rounded-full" style="width: {{ topic.accuracy * 100 }}%"></div>
                 </div>
+                <p class="text-xs text-red-700 dark:text-red-300">{{ topic.wrong }} wrong out of {{ topic.total }} attempts</p>
             </div>
             {% endfor %}
         </div>
@@ -32,80 +123,104 @@
     {% endif %}
 
     <!-- Quick Actions -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <a href="{{ url_for('drill_mcq') }}" class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover:shadow-md transition-shadow">
-            <div class="flex items-center">
-                <div class="flex-shrink-0">
-                    <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center">
-                        <svg class="w-5 h-5 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
+    <div class="mb-8">
+        <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">🎯 Quick Actions</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <a href="{{ url_for('drill_mcq') }}" class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border-2 border-blue-200 dark:border-blue-800 hover:border-blue-400 dark:hover:border-blue-600 p-6 hover:shadow-lg transition-all transform hover:-translate-y-1">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-xl flex items-center justify-center">
+                            <svg class="w-7 h-7 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="ml-4">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">MCQ Drill</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">10 random questions</p>
                     </div>
                 </div>
-                <div class="ml-4">
-                    <h3 class="text-lg font-medium text-gray-900 dark:text-white">MCQ Drill</h3>
-                    <p class="text-sm text-gray-500 dark:text-gray-400">Quick 10-question practice</p>
-                </div>
-            </div>
-        </a>
+            </a>
 
-        <a href="{{ url_for('practice_saq') }}" class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover:shadow-md transition-shadow">
-            <div class="flex items-center">
-                <div class="flex-shrink-0">
-                    <div class="w-8 h-8 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center">
-                        <svg class="w-5 h-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                        </svg>
+            <a href="{{ url_for('practice_saq') }}" class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border-2 border-green-200 dark:border-green-800 hover:border-green-400 dark:hover:border-green-600 p-6 hover:shadow-lg transition-all transform hover:-translate-y-1">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <div class="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-xl flex items-center justify-center">
+                            <svg class="w-7 h-7 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="ml-4">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">SAQ Practice</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">Scenario-based answers</p>
                     </div>
                 </div>
-                <div class="ml-4">
-                    <h3 class="text-lg font-medium text-gray-900 dark:text-white">SAQ Practice</h3>
-                    <p class="text-sm text-gray-500 dark:text-gray-400">Structured answer practice</p>
-                </div>
-            </div>
-        </a>
+            </a>
 
-        <a href="{{ url_for('cheats') }}" class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover:shadow-md transition-shadow">
-            <div class="flex items-center">
-                <div class="flex-shrink-0">
-                    <div class="w-8 h-8 bg-yellow-100 dark:bg-yellow-900 rounded-lg flex items-center justify-center">
-                        <svg class="w-5 h-5 text-yellow-600 dark:text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
-                        </svg>
+            <a href="{{ url_for('cheats') }}" class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border-2 border-yellow-200 dark:border-yellow-800 hover:border-yellow-400 dark:hover:border-yellow-600 p-6 hover:shadow-lg transition-all transform hover:-translate-y-1">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <div class="w-12 h-12 bg-yellow-100 dark:bg-yellow-900 rounded-xl flex items-center justify-center">
+                            <svg class="w-7 h-7 text-yellow-600 dark:text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="ml-4">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Cheat Sheets</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">Quick reference cards</p>
                     </div>
                 </div>
-                <div class="ml-4">
-                    <h3 class="text-lg font-medium text-gray-900 dark:text-white">Cheat Sheets</h3>
-                    <p class="text-sm text-gray-500 dark:text-gray-400">Quick reference cards</p>
-                </div>
-            </div>
-        </a>
+            </a>
 
-        <a href="{{ url_for('review') }}" class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover:shadow-md transition-shadow">
-            <div class="flex items-center">
-                <div class="flex-shrink-0">
-                    <div class="w-8 h-8 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center">
-                        <svg class="w-5 h-5 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
-                        </svg>
+            <a href="{{ url_for('review') }}" class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border-2 border-purple-200 dark:border-purple-800 hover:border-purple-400 dark:hover:border-purple-600 p-6 hover:shadow-lg transition-all transform hover:-translate-y-1">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-xl flex items-center justify-center">
+                            <svg class="w-7 h-7 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="ml-4">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Review</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">Focus on mistakes</p>
                     </div>
                 </div>
-                <div class="ml-4">
-                    <h3 class="text-lg font-medium text-gray-900 dark:text-white">Review Mistakes</h3>
-                    <p class="text-sm text-gray-500 dark:text-gray-400">Focus on weak areas</p>
-                </div>
-            </div>
-        </a>
+            </a>
+        </div>
     </div>
 
     <!-- Study Tips -->
-    <div class="mt-8 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
-        <h3 class="text-lg font-medium text-blue-900 dark:text-blue-100 mb-2">Study Tips</h3>
-        <ul class="text-sm text-blue-800 dark:text-blue-200 space-y-1">
-            <li>• Focus on topics with accuracy below 80%</li>
-            <li>• Use the SAQ scaffold: Define → Interpret → Apply → Conclusion</li>
-            <li>• Practice MCQ drills daily for retention</li>
-            <li>• Review flashcards for quick recall</li>
+    <div class="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
+        <h3 class="text-lg font-semibold text-blue-900 dark:text-blue-100 mb-3 flex items-center">
+            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+            </svg>
+            Study Tips for Success
+        </h3>
+        <ul class="text-sm text-blue-800 dark:text-blue-200 space-y-2">
+            <li class="flex items-start">
+                <span class="text-blue-600 dark:text-blue-400 mr-2">✓</span>
+                <span>Focus on topics below 80% accuracy first</span>
+            </li>
+            <li class="flex items-start">
+                <span class="text-blue-600 dark:text-blue-400 mr-2">✓</span>
+                <span>Use SAQ scaffold: <strong>Law → Interpret → Apply → Conclude</strong></span>
+            </li>
+            <li class="flex items-start">
+                <span class="text-blue-600 dark:text-blue-400 mr-2">✓</span>
+                <span>Practice 10-20 MCQs daily for better retention</span>
+            </li>
+            <li class="flex items-start">
+                <span class="text-blue-600 dark:text-blue-400 mr-2">✓</span>
+                <span>Review flashcards for quick recall of BWC exceptions, SALUTE, AOJ, and statutes</span>
+            </li>
+            <li class="flex items-start">
+                <span class="text-blue-600 dark:text-blue-400 mr-2">✓</span>
+                <span>Mark arrestable vs non-arrestable offences + aggravating factors (ACTive-PUNCH)</span>
+            </li>
         </ul>
     </div>
 </div>

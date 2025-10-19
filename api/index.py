@@ -247,7 +247,7 @@ def test():
 
 @app.route('/')
 def index():
-    """Home dashboard with weak topics"""
+    """Home dashboard with stats and weak topics"""
     user_id = session.get('user_id', 'local-user')
     
     # Ensure database is initialized
@@ -261,15 +261,106 @@ def index():
     try:
         cur = conn.cursor()
         
-        # Simplified query - just get all topics for now
-        # We'll add progress tracking later once basic functionality works
-        cur.execute("SELECT name FROM topics ORDER BY name")
-        topics = [dict(row) for row in cur.fetchall()]
+        # Get overall stats
+        cur.execute("SELECT COUNT(*) FROM mcq")
+        total_mcqs = cur.fetchone()[0]
         
-        # For now, show all topics as "weak" until we have progress data
-        weak_topics = [{"name": topic["name"], "accuracy": 0.0} for topic in topics]
+        cur.execute("SELECT COUNT(*) FROM saq")
+        total_saqs = cur.fetchone()[0]
         
-        return render_template('index.html', weak_topics=weak_topics)
+        cur.execute("SELECT COUNT(*) FROM flashcards")
+        total_flashcards = cur.fetchone()[0]
+        
+        cur.execute("SELECT COUNT(*) FROM topics")
+        total_topics = cur.fetchone()[0]
+        
+        # Get user progress
+        cur.execute("""
+            SELECT COUNT(DISTINCT item_id) 
+            FROM progress 
+            WHERE user_id = ? AND item_type = 'mcq'
+        """, (user_id,))
+        mcq_completed = cur.fetchone()[0]
+        
+        cur.execute("""
+            SELECT COUNT(DISTINCT item_id) 
+            FROM progress 
+            WHERE user_id = ? AND item_type = 'saq'
+        """, (user_id,))
+        saq_completed = cur.fetchone()[0]
+        
+        cur.execute("""
+            SELECT 
+                SUM(correct_count) as correct,
+                SUM(wrong_count) as wrong
+            FROM progress 
+            WHERE user_id = ?
+        """, (user_id,))
+        result = cur.fetchone()
+        correct = result[0] or 0
+        wrong = result[1] or 0
+        total_attempts = correct + wrong
+        accuracy = correct / total_attempts if total_attempts > 0 else 0
+        
+        cur.execute("""
+            SELECT COUNT(DISTINCT t.id)
+            FROM topics t
+            JOIN mcq m ON t.id = m.topic_id
+            JOIN progress p ON m.id = p.item_id AND p.item_type = 'mcq'
+            WHERE p.user_id = ?
+        """, (user_id,))
+        topics_practiced = cur.fetchone()[0]
+        
+        stats = {
+            'total_mcqs': total_mcqs,
+            'total_saqs': total_saqs,
+            'total_flashcards': total_flashcards,
+            'total_topics': total_topics,
+            'mcq_completed': mcq_completed,
+            'saq_completed': saq_completed,
+            'correct': correct,
+            'total': total_attempts,
+            'accuracy': accuracy,
+            'topics_practiced': topics_practiced
+        }
+        
+        # Get topic-level progress
+        cur.execute("""
+            SELECT 
+                t.name,
+                SUM(p.correct_count) as correct,
+                SUM(p.wrong_count) as wrong,
+                SUM(p.correct_count + p.wrong_count) as attempts
+            FROM topics t
+            JOIN mcq m ON t.id = m.topic_id
+            JOIN progress p ON m.id = p.item_id AND p.item_type = 'mcq' AND p.user_id = ?
+            GROUP BY t.id, t.name
+            HAVING attempts > 0
+            ORDER BY CAST(correct AS FLOAT) / (correct + wrong) ASC
+        """, (user_id,))
+        
+        topic_progress = []
+        weak_topics = []
+        
+        for row in cur.fetchall():
+            topic_data = {
+                'name': row[0],
+                'correct': row[1],
+                'wrong': row[2],
+                'total': row[3],
+                'attempts': row[3],
+                'accuracy': row[1] / row[3] if row[3] > 0 else 0
+            }
+            topic_progress.append(topic_data)
+            
+            # Topics with < 70% accuracy are weak
+            if topic_data['accuracy'] < 0.7:
+                weak_topics.append(topic_data)
+        
+        return render_template('index.html', 
+                             stats=stats, 
+                             topic_progress=topic_progress,
+                             weak_topics=weak_topics)
         
     except Exception as e:
         import traceback
