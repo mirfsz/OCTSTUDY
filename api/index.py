@@ -1,7 +1,7 @@
 import os
 import json
-import psycopg2
-from psycopg2.extras import RealDictCursor
+import psycopg
+from psycopg.rows import dict_row
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for
 from werkzeug.security import generate_password_hash, check_password_hash
 import uuid
@@ -15,9 +15,9 @@ app.secret_key = os.environ.get('SECRET_KEY', 'dev-secret-key-change-in-producti
 def get_db_connection():
     """Get database connection using Vercel Postgres"""
     try:
-        conn = psycopg2.connect(
+        conn = psycopg.connect(
             host=os.environ.get('POSTGRES_HOST'),
-            database=os.environ.get('POSTGRES_DATABASE'),
+            dbname=os.environ.get('POSTGRES_DATABASE'),
             user=os.environ.get('POSTGRES_USER'),
             password=os.environ.get('POSTGRES_PASSWORD'),
             port=os.environ.get('POSTGRES_PORT', 5432)
@@ -255,7 +255,7 @@ def index():
         return "Database connection failed", 500
     
     try:
-        cur = conn.cursor(cursor_factory=RealDictCursor)
+        cur = conn.cursor(row_factory=dict_row)
         
         # Get weak topics (topics with < 80% accuracy)
         cur.execute("""
@@ -292,7 +292,7 @@ def drill_mcq():
         return "Database connection failed", 500
     
     try:
-        cur = conn.cursor(cursor_factory=RealDictCursor)
+        cur = conn.cursor(row_factory=dict_row)
         
         # Get questions (60% weak topics, 40% random)
         cur.execute("""
@@ -380,7 +380,7 @@ def practice_saq():
         return "Database connection failed", 500
     
     try:
-        cur = conn.cursor(cursor_factory=RealDictCursor)
+        cur = conn.cursor(row_factory=dict_row)
         
         cur.execute("""
             SELECT s.*, t.name as topic_name
@@ -430,7 +430,7 @@ def cheats():
         return "Database connection failed", 500
     
     try:
-        cur = conn.cursor(cursor_factory=RealDictCursor)
+        cur = conn.cursor(row_factory=dict_row)
         
         if topic == 'all':
             cur.execute("""
@@ -472,7 +472,7 @@ def review():
         return "Database connection failed", 500
     
     try:
-        cur = conn.cursor(cursor_factory=RealDictCursor)
+        cur = conn.cursor(row_factory=dict_row)
         
         # Get items with low accuracy
         cur.execute("""
