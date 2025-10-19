@@ -395,8 +395,10 @@ def practice_saq():
             LIMIT 1
         """)
         
-        saq = cur.fetchone()
-        if saq:
+        row = cur.fetchone()
+        saq = None
+        if row:
+            saq = dict(row)
             saq['keywords'] = json.loads(saq['keywords_json'])
             saq['statute_refs'] = json.loads(saq['statute_refs_json'])
         
@@ -404,6 +406,8 @@ def practice_saq():
         
     except Exception as e:
         print(f"Error in practice_saq: {e}")
+        import traceback
+        traceback.print_exc()
         return "Error loading SAQ practice", 500
     finally:
         conn.close()
