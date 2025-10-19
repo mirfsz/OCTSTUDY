@@ -257,6 +257,23 @@ def load_seed_data(conn):
         print(f"Error loading seed data: {e}")
 
 # Routes
+@app.route('/test')
+def test():
+    """Simple test route to check if the app is working"""
+    try:
+        conn = get_db_connection()
+        if not conn:
+            return "Database connection failed", 500
+        
+        cur = conn.cursor()
+        cur.execute("SELECT COUNT(*) FROM topics")
+        count = cur.fetchone()[0]
+        conn.close()
+        
+        return f"App is working! Database has {count} topics."
+    except Exception as e:
+        return f"Error: {str(e)}", 500
+
 @app.route('/')
 def index():
     """Home dashboard with weak topics"""
@@ -273,31 +290,19 @@ def index():
     try:
         cur = conn.cursor()
         
-        # Get weak topics (topics with < 80% accuracy)
-        cur.execute("""
-            SELECT t.name, 
-                   COALESCE(AVG(CASE WHEN p.correct_count + p.wrong_count > 0 
-                               THEN CAST(p.correct_count AS FLOAT) / (p.correct_count + p.wrong_count) 
-                               ELSE 0 END), 0) as accuracy
-            FROM topics t
-            LEFT JOIN mcq m ON t.id = m.topic_id
-            LEFT JOIN saq s ON t.id = s.topic_id
-            LEFT JOIN progress p ON ((p.item_type = 'mcq' AND p.item_id = m.id) OR 
-                                    (p.item_type = 'saq' AND p.item_id = s.id)) AND p.user_id = ?
-            GROUP BY t.id, t.name
-            HAVING COALESCE(AVG(CASE WHEN p.correct_count + p.wrong_count > 0 
-                           THEN CAST(p.correct_count AS FLOAT) / (p.correct_count + p.wrong_count) 
-                           ELSE 0 END), 0) < 0.8
-            ORDER BY accuracy ASC
-        """, (user_id,))
+        # Simplified query - just get all topics for now
+        # We'll add progress tracking later once basic functionality works
+        cur.execute("SELECT name FROM topics ORDER BY name")
+        topics = [dict(row) for row in cur.fetchall()]
         
-        weak_topics = [dict(row) for row in cur.fetchall()]
+        # For now, show all topics as "weak" until we have progress data
+        weak_topics = [{"name": topic["name"], "accuracy": 0.0} for topic in topics]
         
         return render_template('index.html', weak_topics=weak_topics)
         
     except Exception as e:
         print(f"Error in index: {e}")
-        return "Error loading dashboard", 500
+        return f"Error loading dashboard: {str(e)}", 500
     finally:
         conn.close()
 
