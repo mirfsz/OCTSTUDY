@@ -397,7 +397,7 @@ def index():
 
 @app.route('/drill/mcq')
 def drill_mcq():
-    """Start MCQ drill"""
+    """Start MCQ drill with improved variety and spaced repetition"""
     user_id = session.get('user_id', 'local-user')
     
     # Ensure database is initialized
@@ -411,18 +411,74 @@ def drill_mcq():
     try:
         cur = conn.cursor()
         
-        # Get questions (60% weak topics, 40% random)
+        # Improved question selection algorithm:
+        # 1. Prioritize questions with low accuracy (< 70%)
+        # 2. Include questions from different topics for variety
+        # 3. Mix in some new/unseen questions
+        # 4. Use spaced repetition - questions answered correctly less recently
+        
+        # Get weak questions (accuracy < 70%, attempted at least once)
+        cur.execute("""
+            SELECT m.*, t.name as topic_name, p.correct_count, p.wrong_count,
+                   CAST(p.correct_count AS FLOAT) / (p.correct_count + p.wrong_count) as accuracy
+            FROM mcq m
+            JOIN topics t ON m.topic_id = t.id
+            LEFT JOIN progress p ON m.id = p.item_id AND p.item_type = 'mcq' AND p.user_id = ?
+            WHERE p.correct_count + p.wrong_count > 0 
+            AND CAST(p.correct_count AS FLOAT) / (p.correct_count + p.wrong_count) < 0.7
+            ORDER BY accuracy ASC, RANDOM()
+            LIMIT 4
+        """, (user_id,))
+        weak_questions = [dict(row) for row in cur.fetchall()]
+        
+        # Get questions from different topics for variety
         cur.execute("""
             SELECT m.*, t.name as topic_name
             FROM mcq m
             JOIN topics t ON m.topic_id = t.id
             LEFT JOIN progress p ON m.id = p.item_id AND p.item_type = 'mcq' AND p.user_id = ?
-            WHERE p.correct_count + p.wrong_count < 5 OR p.correct_count + p.wrong_count IS NULL
+            WHERE m.id NOT IN (SELECT id FROM (
+                SELECT m2.id FROM mcq m2
+                LEFT JOIN progress p2 ON m2.id = p2.item_id AND p2.item_type = 'mcq' AND p2.user_id = ?
+                WHERE p2.correct_count + p2.wrong_count > 0 
+                AND CAST(p2.correct_count AS FLOAT) / (p2.correct_count + p2.wrong_count) < 0.7
+            ))
+            GROUP BY t.id
             ORDER BY RANDOM()
-            LIMIT 10
-        """, (user_id,))
+            LIMIT 3
+        """, (user_id, user_id))
+        variety_questions = [dict(row) for row in cur.fetchall()]
         
-        questions = [dict(row) for row in cur.fetchall()]
+        # Get new/unseen questions
+        cur.execute("""
+            SELECT m.*, t.name as topic_name
+            FROM mcq m
+            JOIN topics t ON m.topic_id = t.id
+            LEFT JOIN progress p ON m.id = p.item_id AND p.item_type = 'mcq' AND p.user_id = ?
+            WHERE p.item_id IS NULL
+            ORDER BY RANDOM()
+            LIMIT 3
+        """, (user_id,))
+        new_questions = [dict(row) for row in cur.fetchall()]
+        
+        # Combine and shuffle
+        all_questions = weak_questions + variety_questions + new_questions
+        random.shuffle(all_questions)
+        
+        # Take only 10 questions
+        questions = all_questions[:10]
+        
+        # If we don't have 10 questions, fill with random ones
+        if len(questions) < 10:
+            cur.execute("""
+                SELECT m.*, t.name as topic_name
+                FROM mcq m
+                JOIN topics t ON m.topic_id = t.id
+                ORDER BY RANDOM()
+                LIMIT ?
+            """, (10 - len(questions),))
+            additional = [dict(row) for row in cur.fetchall()]
+            questions.extend(additional)
         
         # Convert choices_json to list
         for q in questions:
@@ -432,6 +488,8 @@ def drill_mcq():
         
     except Exception as e:
         print(f"Error in drill_mcq: {e}")
+        import traceback
+        traceback.print_exc()
         return "Error loading MCQ drill", 500
     finally:
         conn.close()

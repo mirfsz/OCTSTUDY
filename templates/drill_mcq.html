@@ -73,8 +73,8 @@
 
                     <div class="space-y-3 answer-choices">
                         {% for choice in question.choices %}
-                        <label class="answer-option flex items-center p-4 border-2 border-gray-200 dark:border-gray-600 rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition-all">
-                            <input type="radio" name="answer_{{ loop.index0 }}" value="{{ loop.index0 }}" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300">
+                        <label class="answer-option flex items-center p-4 border-2 border-gray-200 dark:border-gray-600 rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition-all" data-choice-index="{{ loop.index0 }}">
+                            <input type="radio" name="answer_{{ loop.index0 }}" value="{{ loop.index0 }}" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 choice-radio">
                             <span class="ml-3 text-gray-900 dark:text-white flex-1">{{ choice }}</span>
                         </label>
                         {% endfor %}
@@ -109,16 +109,18 @@
                 {% endfor %}
             </div>
 
-            <div class="mt-6 flex justify-between">
+                    <div class="mt-6 flex justify-between items-center">
                 <button id="prevBtn" class="px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white disabled:opacity-50 disabled:cursor-not-allowed" disabled>
                     ← Previous
                 </button>
-                <button id="nextBtn" class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors font-medium hidden">
-                    Next Question →
-                </button>
-                <button id="finishBtn" class="px-6 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors font-medium hidden">
-                    Finish Drill ✓
-                </button>
+                <div class="flex gap-3">
+                    <button id="nextBtn" class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors font-medium hidden">
+                        Next Question →
+                    </button>
+                    <button id="finishBtn" class="px-6 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors font-medium hidden">
+                        Finish Drill ✓
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -140,10 +142,13 @@
                 <div class="text-sm text-gray-600 dark:text-gray-400 mt-1">Accuracy</div>
             </div>
         </div>
-        <div class="mt-8 text-center">
+        <div class="mt-8 text-center flex gap-4 justify-center">
             <a href="{{ url_for('drill_mcq') }}" class="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors text-lg">
-                🔄 Start New Drill
+                🔄 New Set (10 Questions)
             </a>
+            <button id="continueDrillBtn" class="inline-flex items-center px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition-colors text-lg">
+                ⚡ Continue Drilling
+            </button>
         </div>
     </div>
 
@@ -376,6 +381,20 @@ document.addEventListener('DOMContentLoaded', function() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
+    // Allow unselecting radio buttons by clicking again
+    document.querySelectorAll('.answer-option').forEach(label => {
+        label.addEventListener('click', function(e) {
+            const radio = this.querySelector('.choice-radio');
+            if (radio && !radio.disabled) {
+                // If clicking the already selected radio, unselect it
+                if (radio.checked && e.target !== radio) {
+                    e.preventDefault();
+                    radio.checked = false;
+                }
+            }
+        });
+    });
+    
     // Event listeners - use event delegation
     document.addEventListener('click', function(e) {
         if (e.target.classList.contains('submit-btn') || e.target.closest('.submit-btn')) {
@@ -388,6 +407,12 @@ document.addEventListener('DOMContentLoaded', function() {
     nextBtn.addEventListener('click', nextQuestion);
     prevBtn.addEventListener('click', prevQuestion);
     finishBtn.addEventListener('click', finishDrill);
+    
+    // Continuous drilling mode
+    document.getElementById('continueDrillBtn')?.addEventListener('click', function() {
+        // Reload the page to get new questions
+        window.location.href = '{{ url_for("drill_mcq") }}';
+    });
 
     // Keyboard shortcuts
     document.addEventListener('keydown', function(e) {

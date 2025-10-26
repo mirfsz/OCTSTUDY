@@ -1,7 +1,12 @@
 [
   {
     "stem": "When should a BWC be activated?",
-    "choices": ["Only during arrests", "At the start of every police interaction", "Only when force is used", "When directed by supervisor"],
+    "choices": [
+      "Only during arrests",
+      "At the start of every police interaction",
+      "Only when force is used",
+      "When directed by supervisor"
+    ],
     "answer_idx": 1,
     "explanation": "BWC should be activated at the start of every police interaction. Officers must resume recording if stopped for any of the 10 exceptions.",
     "topic_name": "BWC",
@@ -9,7 +14,12 @@
   },
   {
     "stem": "Which is NOT a BWC exception?",
-    "choices": ["Attending to sexual offences", "Consuming official ease", "Routine traffic stops", "Within secured areas"],
+    "choices": [
+      "Attending to sexual offences",
+      "Consuming official ease",
+      "Routine traffic stops",
+      "Within secured areas"
+    ],
     "answer_idx": 2,
     "explanation": "Routine traffic stops are NOT an exception. The 10 exceptions: sexual offences, secured areas, pumping petrol, hospital, consuming OE, personal communications, diplomat requests, MOP requests stop, anti-crime rounds with restrictions, non-crime in private places.",
     "topic_name": "BWC",
@@ -17,7 +27,12 @@
   },
   {
     "stem": "Mary left bag to reserve seat. It was missing when she returned. Report type?",
-    "choices": ["NP299 theft", "Station diary", "NP322 loss", "NP322 theft"],
+    "choices": [
+      "NP299 theft",
+      "Station diary",
+      "NP322 loss",
+      "NP322 theft"
+    ],
     "answer_idx": 2,
     "explanation": "NP322 loss report. Without witnessing theft, classified as loss.",
     "topic_name": "Reports",
@@ -25,7 +40,12 @@
   },
   {
     "stem": "What does SALUTE reporting format stand for?",
-    "choices": ["Standard Alert Level Update Time Equipment", "Size Activity Location Unit Time Equipment", "Security Assessment Level Unit Time Evaluation", "Situation Alert Location Update Time Environment"],
+    "choices": [
+      "Standard Alert Level Update Time Equipment",
+      "Size Activity Location Unit Time Equipment",
+      "Security Assessment Level Unit Time Evaluation",
+      "Situation Alert Location Update Time Environment"
+    ],
     "answer_idx": 1,
     "explanation": "SALUTE: Size (number), Activity (what), Location (where), Unit (reporting), Time (when), Equipment (weapons).",
     "topic_name": "SALUTE",
@@ -33,7 +53,12 @@
   },
   {
     "stem": "Ashley's brother watches radical videos and has bomb notes. Action?",
-    "choices": ["Inform parents", "Call ISD hotline", "Ignore it", "Just advise brother"],
+    "choices": [
+      "Inform parents",
+      "Call ISD hotline",
+      "Ignore it",
+      "Just advise brother"
+    ],
     "answer_idx": 1,
     "explanation": "Call ISD hotline. Radical content and bomb notes require professional intervention.",
     "topic_name": "Security Threats",
@@ -41,7 +66,12 @@
   },
   {
     "stem": "Off-duty officer witnesses armed parang attack. Action?",
-    "choices": ["Film only", "Use improvised weapons to tackle", "Hide and observe", "Run away"],
+    "choices": [
+      "Film only",
+      "Use improvised weapons to tackle",
+      "Hide and observe",
+      "Run away"
+    ],
     "answer_idx": 1,
     "explanation": "As officer, use improvised weapons and rally others to tackle attacker.",
     "topic_name": "Armed Attacks",
@@ -49,7 +79,12 @@
   },
   {
     "stem": "Officer checks FOCUS for report against his brother. Offence?",
-    "choices": ["No offence", "Computer Misuse Act", "Only disciplinary", "Breach of trust"],
+    "choices": [
+      "No offence",
+      "Computer Misuse Act",
+      "Only disciplinary",
+      "Breach of trust"
+    ],
     "answer_idx": 1,
     "explanation": "Unauthorised access under Computer Misuse Act.",
     "topic_name": "Computer Misuse Act",
@@ -57,7 +92,12 @@
   },
   {
     "stem": "Can officer accept discount from complainant?",
-    "choices": ["Yes if off-duty", "No, against PGO", "Yes with approval", "Yes, no issue"],
+    "choices": [
+      "Yes if off-duty",
+      "No, against PGO",
+      "Yes with approval",
+      "Yes, no issue"
+    ],
     "answer_idx": 1,
     "explanation": "Against PGO A10. Prevents conflicts of interest.",
     "topic_name": "PGO",
@@ -65,7 +105,12 @@
   },
   {
     "stem": "Officer treats friend differently. Shows lack of:",
-    "choices": ["Courage", "Integrity", "Fairness", "Loyalty"],
+    "choices": [
+      "Courage",
+      "Integrity",
+      "Fairness",
+      "Loyalty"
+    ],
     "answer_idx": 2,
     "explanation": "Lack of fairness. Must treat all equally.",
     "topic_name": "Police Values",
@@ -73,7 +118,12 @@
   },
   {
     "stem": "Seizing stolen items as exhibits:",
-    "choices": ["Issue NP323 to suspect", "Diary only", "Issue NP323 to owner", "Verbal acknowledgment"],
+    "choices": [
+      "Issue NP323 to suspect",
+      "Diary only",
+      "Issue NP323 to owner",
+      "Verbal acknowledgment"
+    ],
     "answer_idx": 2,
     "explanation": "Issue NP323 to owner for documentation.",
     "topic_name": "Exhibits",
@@ -81,7 +131,12 @@
   },
   {
     "stem": "Subject felt compelled to follow officer, not told arrested. Is he arrested?",
-    "choices": ["No, not restrained", "No, not told", "No, not handcuffed", "Yes, felt compelled"],
+    "choices": [
+      "No, not restrained",
+      "No, not told",
+      "No, not handcuffed",
+      "Yes, felt compelled"
+    ],
     "answer_idx": 3,
     "explanation": "Under CPC, arrested if felt compelled.",
     "topic_name": "Arrest",
@@ -89,7 +144,12 @@
   },
   {
     "stem": "Aircon noise complaint. Officer action?",
-    "choices": ["Refer HDB", "Can't help", "Lodge report first", "Take statement first"],
+    "choices": [
+      "Refer HDB",
+      "Can't help",
+      "Lodge report first",
+      "Take statement first"
+    ],
     "answer_idx": 0,
     "explanation": "No criminal offence. Refer to HDB following NWD policy.",
     "topic_name": "NWD",
@@ -97,7 +157,12 @@
   },
   {
     "stem": "Ken posts abusive remarks about ex with her number. Strangers harass her. Offence?",
-    "choices": ["Intentional Harassment S3 PHA", "Harassment S4 PHA", "No offence", "Stalking S7 PHA"],
+    "choices": [
+      "Intentional Harassment S3 PHA",
+      "Harassment S4 PHA",
+      "No offence",
+      "Stalking S7 PHA"
+    ],
     "answer_idx": 0,
     "explanation": "Intentional Harassment Section 3 Protection from Harassment Act.",
     "topic_name": "PHA",
@@ -105,7 +170,12 @@
   },
   {
     "stem": "Judy has friend's IC as loan security. Offence?",
-    "choices": ["S13(1)(d) NRA", "No offence", "Fraudulent possession MOA", "Breach of trust"],
+    "choices": [
+      "S13(1)(d) NRA",
+      "No offence",
+      "Fraudulent possession MOA",
+      "Breach of trust"
+    ],
     "answer_idx": 0,
     "explanation": "Section 13(1)(d) National Registration Act. May arrest and seize IC.",
     "topic_name": "National Registration Act",
@@ -113,7 +183,12 @@
   },
   {
     "stem": "Jacky rubs leg against sleeping girl intentionally. Offence?",
-    "choices": ["Indecent behaviour", "Outrages on decency", "Voyeurism", "Outrage of modesty"],
+    "choices": [
+      "Indecent behaviour",
+      "Outrages on decency",
+      "Voyeurism",
+      "Outrage of modesty"
+    ],
     "answer_idx": 3,
     "explanation": "Outrage of modesty S354 Penal Code.",
     "topic_name": "Sexual Offences",
@@ -121,7 +196,12 @@
   },
   {
     "stem": "Danny threatens Julie for handbag. She shouts, he flees. Offence?",
-    "choices": ["Criminal intimidation", "Attempted robbery with hurt", "Extortion", "Attempted robbery"],
+    "choices": [
+      "Criminal intimidation",
+      "Attempted robbery with hurt",
+      "Extortion",
+      "Attempted robbery"
+    ],
     "answer_idx": 3,
     "explanation": "Attempted robbery. Attempt itself is offence.",
     "topic_name": "Robbery",
@@ -129,7 +209,12 @@
   },
   {
     "stem": "Three rob store. One shoots cashier with unknown gun. Cashier dies. Who liable?",
-    "choices": ["Only shooter", "All for robbery only", "All for murder in common intention", "All for conspiracy"],
+    "choices": [
+      "Only shooter",
+      "All for robbery only",
+      "All for murder in common intention",
+      "All for conspiracy"
+    ],
     "answer_idx": 2,
     "explanation": "All liable for murder in furtherance of common intention.",
     "topic_name": "Common Intention",
@@ -137,7 +222,12 @@
   },
   {
     "stem": "Which offence is strict liability?",
-    "choices": ["VCH", "Criminal Force", "Possession of offensive weapons", "Housebreaking"],
+    "choices": [
+      "VCH",
+      "Criminal Force",
+      "Possession of offensive weapons",
+      "Housebreaking"
+    ],
     "answer_idx": 2,
     "explanation": "Possession of offensive weapons is strict liability.",
     "topic_name": "Offensive Weapons",
@@ -145,266 +235,275 @@
   },
   {
     "stem": "Under Article 9 Constitution, arrested person must be:",
-    "choices": ["All: informed of reasons, consult lawyer, before magistrate within 48 hours", "Only informed of reasons", "Only lawyer access", "Only before magistrate"],
+    "choices": [
+      "All: informed of reasons, consult lawyer, before magistrate within 48 hours",
+      "Only informed of reasons",
+      "Only lawyer access",
+      "Only before magistrate"
+    ],
     "answer_idx": 0,
     "explanation": "All apply under Article 9 constitutional rights.",
     "topic_name": "Constitutional Rights",
     "source_ref": "Ease Spring"
   },
   {
-    "stem": "Subject uses abusive words after refusing particulars. First action?",
-    "choices": ["Arrest for refusing", "Leave him alone", "Arrest for abusive words", "Pacify and warn assertively"],
-    "answer_idx": 3,
-    "explanation": "Try to pacify and warn assertively. De-escalate first.",
+    "stem": "You ask a man for his particulars and he starts shouting vulgarities at you. What should you do first?",
+    "choices": [
+      "Arrest him immediately",
+      "Warn him to stop using abusive words",
+      "Walk away",
+      "Record video as evidence"
+    ],
+    "answer_idx": 1,
+    "explanation": "Warn him first. Common trap: Choosing A. Arrest only if he continues after warning (POHA s6). One-liner: Warn before wrist.",
     "topic_name": "Dispute Management",
-    "source_ref": "MCQ 2019"
+    "source_ref": "User Input"
   },
   {
-    "stem": "Motorist had accident, bruises, sought treatment, given 2-day MC. Action?",
-    "choices": ["Non-injury", "Special case to TP", "GIA format", "Injury case - NP168"],
-    "answer_idx": 3,
-    "explanation": "Injury case as sought treatment and given MC. Lodge NP168.",
-    "topic_name": "Traffic",
-    "source_ref": "MCQ 2019"
-  },
-  {
-    "stem": "Crime scene photo of small object <15mm. What 2 photos?",
-    "choices": ["Both close-up", "Same twice", "One close-up, one showing location", "Both general views"],
+    "stem": "Driver self-drove to hospital and got 2-day MC after accident.",
+    "choices": [
+      "Non-injury accident",
+      "Property damage only",
+      "Injury accident",
+      "No report needed"
+    ],
     "answer_idx": 2,
-    "explanation": "One close-up, one showing location relation to scene.",
+    "explanation": "Injury accident. Trap: Thinking 'self-drive = non-injury.' Any MC = injury. One-liner: MC means NP168.",
+    "topic_name": "Traffic",
+    "source_ref": "User Input"
+  },
+  {
+    "stem": "Photographing tiny object (<15 mm) at crime scene. What photos needed?",
+    "choices": [
+      "Two close-ups",
+      "One wide shot only",
+      "One close-up + one showing location",
+      "Random angles"
+    ],
+    "answer_idx": 2,
+    "explanation": "Need one close-up and one showing location context. Trap: Two close-ups - no context. One-liner: Zoom and room.",
     "topic_name": "Crime Scene Photography",
-    "source_ref": "MCQ 2019"
+    "source_ref": "User Input"
   },
   {
-    "stem": "Subject kicks car door (mischief). Officer power?",
-    "choices": ["No power", "Only if owner complains", "Check as non-arrestable in presence", "Arrest as in presence"],
-    "answer_idx": 2,
-    "explanation": "Power to check as non-arrestable offence in presence.",
+    "stem": "Subject kicks car door. What is your power?",
+    "choices": [
+      "Arrest immediately for Mischief",
+      "Check particulars; arrest if he refuses",
+      "Criminal intimidation",
+      "Vandalism"
+    ],
+    "answer_idx": 1,
+    "explanation": "Mischief is non-arrestable; use CPC s65 to demand particulars. Trap: Thinking 'seen offence = arrest.' One-liner: See it, check it, don't clap it.",
     "topic_name": "Mischief",
-    "source_ref": "MCQ 2019"
+    "source_ref": "User Input"
   },
   {
-    "stem": "Man claims US diplomatic immunity but no ID. Action?",
-    "choices": ["Arrest", "Convey to DOR to verify with MFA", "Accept and release", "Call embassy now"],
+    "stem": "Subject claims diplomatic immunity. What should you do?",
+    "choices": [
+      "Ignore claim, arrest",
+      "Verify via MFA through POCC",
+      "Detain for screening",
+      "Seize passport"
+    ],
     "answer_idx": 1,
-    "explanation": "Convey particulars to DOR for MFA verification.",
+    "explanation": "Must verify through MFA via POCC. Trap: Arresting without verification. One-liner: Call MFA before CFA.",
     "topic_name": "Diplomatic Immunity",
-    "source_ref": "MCQ 2019"
+    "source_ref": "User Input"
   },
   {
-    "stem": "Fake customs officer lies about parcel, Irene pays $1000. Offence?",
-    "choices": ["Extortion", "Cheating", "No offence", "Criminal intimidation"],
+    "stem": "You made wrong entry in report. What should you do?",
+    "choices": [
+      "Amend record",
+      "Delete it",
+      "Submit new report and VIDE link",
+      "Leave it"
+    ],
+    "answer_idx": 2,
+    "explanation": "Submit new report and VIDE link. Trap: Editing original breaks audit trail. One-liner: Don't edit, add VIDE.",
+    "topic_name": "Reports",
+    "source_ref": "User Input"
+  },
+  {
+    "stem": "Natural death (known illness). What should you do?",
+    "choices": [
+      "Activate DOR",
+      "Ask family to get CCOD from doctor",
+      "Send patrol",
+      "Inform SCDF"
+    ],
     "answer_idx": 1,
-    "explanation": "Cheating - lied and induced delivery of property.",
-    "topic_name": "Scams",
-    "source_ref": "MCQ 2019"
+    "explanation": "Ask family to get CCOD from doctor. Trap: Calling DOR for natural death. One-liner: Doctor first, not DOR first.",
+    "topic_name": "Death Procedures",
+    "source_ref": "User Input"
   },
   {
-    "stem": "Man with wooden pole refuses 30 mins. Large crowd. End stand-off?",
-    "choices": ["Draw baton move in", "Draw TASER warn fire", "One firearm one baton", "Continue warning"],
+    "stem": "Which is NOT a GRF duty?",
+    "choices": [
+      "Manage incidents",
+      "Proactive ops",
+      "House visits",
+      "Counter duties"
+    ],
+    "answer_idx": 2,
+    "explanation": "House visits = Community Policing. Trap: Assuming all choices fit. One-liner: Ops-Incident-Counter, no home visitor.",
+    "topic_name": "GRF Duties",
+    "source_ref": "User Input"
+  },
+  {
+    "stem": "Handling dispute between two parties. What should you do?",
+    "choices": [
+      "Interview both together",
+      "Stay neutral, separate parties",
+      "Arrest both",
+      "Warn both to leave"
+    ],
     "answer_idx": 1,
-    "explanation": "Draw TASER, warn, fire if refuses. Proportionate force.",
-    "topic_name": "Use of Force",
-    "source_ref": "MCQ 2019"
-  },
-  {
-    "stem": "Sexual crime victim at busy counter. Action?",
-    "choices": ["Queue number", "Gather facts consult SCDO", "Lodge at counter", "Private area, gather, lodge, update SCDO 30min"],
-    "answer_idx": 3,
-    "explanation": "Escort to private area, lodge report, update SCDO within 30 minutes.",
-    "topic_name": "Sexual Offences",
-    "source_ref": "MCQ 2019"
-  },
-  {
-    "stem": "Responding to CA incident. Approaching scene actions?",
-    "choices": ["Turn off aircon 200m, wind up windows, coordinate route, don't park near entrances", "Only aircon off", "Only coordinate", "All above separately"],
-    "answer_idx": 0,
-    "explanation": "All: turn off aircon within 200m, wind up windows, coordinate route, avoid parking near building openings.",
-    "topic_name": "Chemical Agents",
-    "source_ref": "MCQ 2019"
-  },
-  {
-    "stem": "MOP requests to view BWC footage of his check. Action?",
-    "choices": ["All confidential", "Seek court order", "Allow as interested party", "View at NPC with CO approval"],
-    "answer_idx": 3,
-    "explanation": "Can view at NPC with Commanding Officer approval.",
-    "topic_name": "BWC",
-    "source_ref": "MCQ 2019"
-  },
-  {
-    "stem": "Suspect confesses after officer promises only warning. Admissible?",
-    "choices": ["Yes if signed", "No - inducement and promise", "Yes no force", "Yes wouldn't confess if innocent"],
-    "answer_idx": 1,
-    "explanation": "NOT admissible. Inducement and promise used.",
-    "topic_name": "Statement Recording",
-    "source_ref": "MCQ 2019"
-  },
-  {
-    "stem": "Non-injury accident - when IS NP168 required?",
-    "choices": ["Foreign vehicle, pedestrian/cyclist, hit-run, police vehicle", "Only foreign", "Only hit-run", "Only police"],
-    "answer_idx": 0,
-    "explanation": "All listed cases require NP168 even if non-injury.",
-    "topic_name": "Traffic",
-    "source_ref": "MCQ 2019"
-  },
-  {
-    "stem": "Code words for major incident?",
-    "choices": ["Code Blue Red", "May Day", "Blue Storm Minor Red Storm Major", "Blue Storm Major Red Storm"],
-    "answer_idx": 3,
-    "explanation": "Blue Storm Major and Red Storm for major incidents.",
-    "topic_name": "Major Incidents",
-    "source_ref": "MCQ 2020"
-  },
-  {
-    "stem": "Wife threatens husband with knife. No PPO. Action?",
-    "choices": ["Arrest and seize knife S506", "Nothing without PPO", "Advise counselling", "Stern warning only"],
-    "answer_idx": 0,
-    "explanation": "Arrest for criminal intimidation S506 and seize knife.",
+    "explanation": "Stay neutral and separate parties. Trap: Interviewing together escalates anger. One-liner: Split and stay fair.",
     "topic_name": "Dispute Management",
-    "source_ref": "MCQ 2020"
+    "source_ref": "User Input"
   },
   {
-    "stem": "1st at CA incident ION - people dazed, collapsed, smell. Action?",
-    "choices": ["Escape hoods leave directing public", "NBC suits leave", "Move 200m then hoods", "NBC locate switch off AHU"],
-    "answer_idx": 0,
-    "explanation": "Immediately don escape hoods, leave while directing public away.",
-    "topic_name": "Chemical Agents",
-    "source_ref": "MCQ 2020"
-  },
-  {
-    "stem": "Acupuncturist licks customer's toes during massage. She's offended. Offence?",
-    "choices": ["Outrage of Modesty S354", "Not liable", "Outrages on decency", "Not liable - not private part"],
-    "answer_idx": 0,
-    "explanation": "Outrage of Modesty S354 regardless of body part.",
-    "topic_name": "Sexual Offences",
-    "source_ref": "MCQ 2020"
-  },
-  {
-    "stem": "Shoplifter $205, alone, citizen, under investigation similar case. Action?",
-    "choices": ["No arrest Notice to Report", "Arrest Theft in Dwelling photo return", "IO to scene detain pending", "Arrest seize as exhibits"],
+    "stem": "Regarding chain of evidence, what must you do?",
+    "choices": [
+      "Let IO decide value",
+      "Maintain continuous custody record",
+      "Only IO handles evidence",
+      "Lock exhibits in safe"
+    ],
     "answer_idx": 1,
-    "explanation": "Arrest for Theft in Dwelling, bring to station, photo items, return to shop.",
-    "topic_name": "Theft",
-    "source_ref": "MCQ 2020"
+    "explanation": "Maintain continuous custody record. Trap: Thinking only one officer can handle. One-liner: Track each hand for chain to stand.",
+    "topic_name": "Evidence",
+    "source_ref": "User Input"
   },
   {
-    "stem": "GRF officer on 2nd off-day activated for Tier 2 Ops Sudden Rush?",
-    "choices": ["True", "False"],
+    "stem": "Roadblock Stopper duties include:",
+    "choices": [
+      "Retain ID",
+      "Record particulars and return ID",
+      "Search vehicle",
+      "Pass ID to Checker"
+    ],
     "answer_idx": 1,
-    "explanation": "False. Off-duty not activated for Tier 2.",
-    "topic_name": "Ops Sudden Rush",
-    "source_ref": "MCQ 2020"
+    "explanation": "Record particulars and return ID. Trap: Keeping ID or handing to Checker. One-liner: Record, return, refer.",
+    "topic_name": "Roadblock",
+    "source_ref": "User Input"
   },
   {
-    "stem": "Luke joyrode motorcycle, intended to return. Still liable?",
-    "choices": ["No, only joyride", "Yes, theft of motor vehicle", "Yes, riding without consent", "Yes, attempted theft"],
+    "stem": "Fake Customs Officer demands money. What offence?",
+    "choices": [
+      "Extortion",
+      "Cheating",
+      "Criminal intimidation",
+      "Harassment"
+    ],
     "answer_idx": 1,
-    "explanation": "Yes, still theft even if intending to return.",
-    "topic_name": "Theft",
-    "source_ref": "MCQ 2020"
+    "explanation": "Cheating s420 PC. Trap: Selecting Extortion (no fear of injury). One-liner: Lie for cash = Cheat, not Threat.",
+    "topic_name": "Scams",
+    "source_ref": "User Input"
   },
   {
-    "stem": "Neighbour punched causing bruises. Action?",
-    "choices": ["Advise settle", "Arrest VCH", "Tell see IO", "Advise magistrate complaint"],
-    "answer_idx": 3,
-    "explanation": "VCH non-arrestable. Advise magistrate complaint.",
-    "topic_name": "Dispute Management",
-    "source_ref": "MCQ 2020"
+    "stem": "NS man change of address - which agency?",
+    "choices": [
+      "ICA",
+      "SPF HQ",
+      "CMPB",
+      "MOM"
+    ],
+    "answer_idx": 2,
+    "explanation": "CMPB handles NS matters. Trap: Assuming ICA handles all addresses. One-liner: Green IC = CMPB.",
+    "topic_name": "Administrative",
+    "source_ref": "User Input"
   },
   {
-    "stem": "Roadblock - drunk motorist claims asthma can't blow. Action?",
-    "choices": ["Arrest station BEA", "Warn offence to refuse", "Benefit of doubt", "Arrest hospital blood test"],
-    "answer_idx": 3,
-    "explanation": "Arrest S69(5)(b) RTA, escort to hospital for blood test.",
+    "stem": "Crime-scene photo rules - which is WRONG?",
+    "choices": [
+      "Take objective photos",
+      "Eye-level angle",
+      "Replace moved items",
+      "Show relevant objects"
+    ],
+    "answer_idx": 2,
+    "explanation": "Never re-stage scene. Trap: Thinking 'replace for clarity.' One-liner: Real, level, relevant.",
+    "topic_name": "Crime Scene Photography",
+    "source_ref": "User Input"
+  },
+  {
+    "stem": "First step with complainant at counter?",
+    "choices": [
+      "Ask purpose of call",
+      "Ask for ID",
+      "Greet and introduce yourself",
+      "Ask about suspect"
+    ],
+    "answer_idx": 2,
+    "explanation": "Greet and introduce yourself first. Trap: Skipping rapport-building. One-liner: Hello before why.",
+    "topic_name": "Counter Duties",
+    "source_ref": "User Input"
+  },
+  {
+    "stem": "Alcohol test shows amber. What action?",
+    "choices": [
+      "Arrest",
+      "No action",
+      "Escort to hospital",
+      "Retest immediately"
+    ],
+    "answer_idx": 1,
+    "explanation": "Amber = borderline, not fail. Trap: Arresting based on smell alone. One-liner: Amber okay, red no way.",
     "topic_name": "Traffic",
-    "source_ref": "MCQ 2020"
+    "source_ref": "User Input"
   },
   {
-    "stem": "Man threatens suicide with knife. Officer draws TASER fires. Correct?",
-    "choices": ["Correct - real chance", "Incorrect - threatening self only", "Incorrect - draw only", "Incorrect - no imminent threat to officers"],
-    "answer_idx": 1,
-    "explanation": "Incorrect. Threatening self only, no danger to others.",
-    "topic_name": "Use of Force",
-    "source_ref": "MCQ 2020"
+    "stem": "12-year-old girl loitering at night alone. What action?",
+    "choices": [
+      "Arrest for loitering",
+      "Bring to NPC",
+      "Check particulars and advise to go home",
+      "Detain for investigation"
+    ],
+    "answer_idx": 2,
+    "explanation": "Check particulars and advise. Trap: Detaining without offence. One-liner: No crime, just care.",
+    "topic_name": "Juvenile",
+    "source_ref": "User Input"
   },
   {
-    "stem": "What are NWD 3 pre-checks before referring case?",
-    "choices": ["Immediate threat? Offence revealed? Under police purview?", "Crime? Arrest? Evidence?", "Victim? Suspect? Witness?", "Location? Time? Severity?"],
-    "answer_idx": 0,
-    "explanation": "NWD checks: immediate threat to life/property, offence revealed, under police purview.",
-    "topic_name": "NWD",
-    "source_ref": "NWD Manual"
-  },
-  {
-    "stem": "AVS 24-hour hotline for animal incidents?",
-    "choices": ["1800-476-1600", "999", "1800-255-0000", "6339-5000"],
-    "answer_idx": 0,
-    "explanation": "AVS Animal Response Centre: 1800-476-1600.",
-    "topic_name": "Wildlife Incidents",
-    "source_ref": "NWD Manual"
-  },
-  {
-    "stem": "Wild boar charging public near playground with crowd. Force option?",
-    "choices": ["Firearm immediately", "Taser due to crowd safety", "Baton only", "Verbal warning only"],
-    "answer_idx": 1,
-    "explanation": "Taser preferred due to crowd and children nearby. Firearm too risky despite AOJ present.",
-    "topic_name": "Use of Force",
-    "source_ref": "SAQ"
-  },
-  {
-    "stem": "Mission of first responders in armed attack?",
-    "choices": ["Contain and document", "Stop the killing and stop the dying", "Evacuate and secure", "Identify and arrest"],
-    "answer_idx": 1,
-    "explanation": "Stop the killing (contain/neutralise threat) and stop the dying (facilitate SCDF rescue).",
-    "topic_name": "Armed Attacks",
-    "source_ref": "SAQ"
-  },
-  {
-    "stem": "FRC equipment for armed attack response?",
-    "choices": ["Only vest", "BRV, BRH, armor plates, shield", "Only helmet", "Only shield"],
-    "answer_idx": 1,
-    "explanation": "Ballistic/anti-stab vest, helmet NIJ IIIA, armor plates NIJ IV, riot shield.",
-    "topic_name": "Armed Attacks",
-    "source_ref": "SAQ"
-  },
-  {
-    "stem": "What is CCP in armed attack context?",
-    "choices": ["Command Control Post", "Casualty Collection Point", "Central Coordination Point", "Crime Control Post"],
-    "answer_idx": 1,
-    "explanation": "Casualty Collection Point - safe room in warm zone for casualties, guarded by armed officer.",
-    "topic_name": "Armed Attacks",
-    "source_ref": "SAQ"
-  },
-  {
-    "stem": "Online purchase scam. Key crime prevention advice?",
-    "choices": ["Always use credit cards", "Use reputable platforms, check reviews, cash on delivery preferred", "Never shop online", "Only local sellers"],
-    "answer_idx": 1,
-    "explanation": "Use reputable platforms, check seller reviews, prefer cash on delivery or secure payment.",
-    "topic_name": "Scams",
-    "source_ref": "Scams Manual"
-  },
-  {
-    "stem": "Phone scam - caller claims to be police. Key red flag?",
-    "choices": ["Asks for bank details and OTP over phone", "Speaks perfect English", "Knows your name", "Calls from local number"],
-    "answer_idx": 0,
-    "explanation": "Government agencies NEVER request bank details, OTP, or fund transfer over phone.",
-    "topic_name": "Scams",
-    "source_ref": "Scams Manual"
-  },
-  {
-    "stem": "Sec 420 Penal Code offence is?",
-    "choices": ["Cheating", "Cheating and dishonestly inducing delivery of property", "Criminal breach of trust", "Theft"],
-    "answer_idx": 1,
-    "explanation": "S420: Cheating and dishonestly inducing delivery of property. Punishment up to 10 years.",
-    "topic_name": "Scams",
-    "source_ref": "Scams Manual"
-  },
-  {
-    "stem": "Inner cordon in major incident - purpose?",
-    "choices": ["Prevent unauthorized entry and preserve evidence", "Only crowd control", "Only treat casualties", "Evacuate everyone"],
-    "answer_idx": 0,
-    "explanation": "Inner cordon prevents unauthorized entry, preserves scene for evidence, contains casualties for treatment. Outer cordon manages perimeter.",
+    "stem": "Who can activate Red Storm?",
+    "choices": [
+      "Ground commander only",
+      "POCC only",
+      "OC Ops, TL or Watch Commander",
+      "Any patrol officer"
+    ],
+    "answer_idx": 2,
+    "explanation": "OC Ops, Team Leader or Watch Commander can activate. Trap: Thinking only HQ can do it. One-liner: TL or POCC can rock.",
     "topic_name": "Major Incidents",
-    "source_ref": "MCQ 2019"
+    "source_ref": "User Input"
+  },
+  {
+    "stem": "Role of Reporting Point in major incident?",
+    "choices": [
+      "Command arrest",
+      "Debrief media",
+      "Gather, brief and deploy officers",
+      "Guard scene perimeter"
+    ],
+    "answer_idx": 2,
+    "explanation": "Gather, brief and deploy officers. Trap: Confusing with staging area for IO. One-liner: Meet, brief, assign.",
+    "topic_name": "Major Incidents",
+    "source_ref": "User Input"
+  },
+  {
+    "stem": "UML graffiti (O$P$ #05-123) on unit door. What offence?",
+    "choices": [
+      "Mischief",
+      "Vandalism",
+      "UML harassment",
+      "Public nuisance"
+    ],
+    "answer_idx": 2,
+    "explanation": "Valid unit + O$P$ = UML harassment. Trap: Marking as Mischief (no borrower identified). One-liner: O$P$ real door = UML for sure.",
+    "topic_name": "UML",
+    "source_ref": "User Input"
   }
 ]
